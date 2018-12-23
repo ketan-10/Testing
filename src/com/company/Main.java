@@ -8,8 +8,7 @@ public class Main {
         Temp<Integer> t = new Temp<>();
         t.findId(2,3);
 
-
     }
-}
 
+}
 

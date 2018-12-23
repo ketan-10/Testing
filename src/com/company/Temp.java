@@ -13,6 +13,9 @@ class Temp <T>  {
 
         return t;
     }
+    public static <T> void print(T t){
+        System.out.println(t);
+    }
 
     public <K extends View> void getId(K k, int i ){
 
