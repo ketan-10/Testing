@@ -26,8 +26,8 @@ public class Main {
          *
          * (https://www.w3schools.com/js/js_function_closures.asp)
          * instead of coping functional programing directly keeps all local variable alive inside inner function
-         * hence inner function (i.e inline interface here) will contain all the local (parent function) as well as global
-         * variable alive inside it(inner returned function) so it wont get garbage collected
+         * hence inner function (i.e inline interface here) will contain all the local (parent function) inside inner function
+           (in a field called closure(javascript) or as a inline class global variable(java)
          * (https://javascript.info/garbage-collection)
          * (actually function contain reference to parent in JSON format)
          *
