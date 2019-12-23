@@ -1,0 +1,39 @@
+How function grows is important 
+Not like derivative dx dy it's a small change not exponential growth
+
+If we make input twice how many times time increases.
+
+N^2.    If N doubles time will increase 4 times
+
+We can improve time complexity by improving recurrence relation
+
+
+Eg.
+For sorting algorithm we improved by divide and conquer
+
+F(n) = F(n/2) + F(n/2) + join(n)
+
+
+If  join(n) is small i.e. to join two half solutions
+And F(n) is n^2
+We can reduce Complexity by solving half half solution and then combining(join)
+
+F(n) =  2*F(n/2) + join(n)
+
+As we can see if we ignore join(n) Complexity is growing twice as fast as input doubles 
+Compare to 4 time in n^2
+
+Note : as it is recurrence relation mean, we can repeat till n=1
+
+
+
+A program is a very very complex function but we can easily determine its worst case Complexity similarity best case which will be easy to examine
+
+
+Time Complexity: Sorting arrays on different machines. Merge Sort is a recursive algorithm and time complexity can be expressed as following recurrence relation.
+T(n) = 2T(n/2) + Q(n)
+The above recurrence can be solved either using Recurrence Tree method or Master method. It falls in case II of Master Method and solution of the recurrence is Q(n*log(n))
+Time complexity of Merge Sort same in all 3 cases (worst, average and best) as merge sort always divides the array in two halves and take linear time to merge two halves.
+Auxiliary Space: O(n)
+Algorithmic Paradigm: Divide and Conquer
+
