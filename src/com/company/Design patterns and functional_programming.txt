@@ -1,0 +1,48 @@
+
+Single user 
+Creating list.  Enemy and call atack to all
+Abstraction. Store .update. draw x y dx dy then create getRect() common method in GameObject
+
+MuliUser
+1) upcasting :-
+     Create a class thats generic and can exist independently 
+     User can ectend that class and perform overriding to cahange functionality according to him and create object of that class 
+     Passing information downwords
+
+2) downcasting :-
+     Library class may require User functions to call on specific time
+     Its the way to pass information upwords
+     It can be achive by passing funtion pointers OR creating interface and let user implement that. Then catch it as a parameter then call funtions directly (Its like association)
+     Also by using abstract class. We can make functions abstract in our class. Its used when class cant exist independently (Its like composition)
+     *Template* :-
+           Only template allow creating object of users class on Library define time in runtime
+           Hence it is userd in dynamically generating scrolling list to create object of singles object on scroll only
+
+
+
+
+
+JAVA
+Java users reference counting concept to store and maintain heap memory
+Reference counting maintain table of stack variable pointing same memory. And memory only get deleted if all reference are out of the scope ( pop from call stack)
+WeekReference holds the address but dont get added to table
+
+Aggregation association and composition 
+Functional programing 
+Javascript inheritance 
+And function passing and direct updating functions through object for specific object using prototyping
+
+
+
+
+
+Functions can exist 
+In function :
+As a function scope only exists for outer function
+Create a concept call closure where if inner function is passed outside then refrence counter mentains the whole outer function into memory
+In Object:
+Using this. Function it will create function separately for each object
+In prototype:
+JavaScript is based on prototype chain
+Fuction will be added to prototype chain and all objects will use same function in memory
+
