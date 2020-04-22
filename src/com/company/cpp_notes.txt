@@ -1,0 +1,320 @@
+
+
+
+stack allocated memory does not store pointer the pointer is stored in code segment not in memory so no pointer variable unless you defined do
+
+you can send reference to avoid coping of object 
+refernce as in using &
+pointers can all be send by referance
+int*&
+
+get heap allocated object, in its actual form, rather than in pointer form (and use -> everyehere)
+
+Entity* e = new Entitiy();
+Entity& myHeapEntity = *e;
+
+just using "Entity et" will create obj on stack 
+
+also stack dont have pointers to memory in memory 
+there pointers are hardcoded in assembly
+
+string define in code is 
+stored in code segment, that is in code assembly itself 
+not in stack or heap
+
+its const char* name = "ketan"
+
+you have to use const as varible in code segment cant be modified 
+so it must be const
+
+when you use " char[] name = "ketan" "
+if you dissasemble above statement you will find 
+compiler copies the memory to stack 
+so now "ketan" is stored on stack
+
+*const*
+const Entity* e = new Entity();
+actual object is constant not pointer 
+theat is e can access only const function defined in class
+
+also for non class
+const int* a = new int;
+a = 10 // not allowed
+a = nullptr // allowed
+actual data(value at memory) can not be changed 
+
+(const after *)
+Entity* const e = new Entity();
+
+here e can not be assigen to new entity 
+that is actual pointer is constant
+int * const a = new int;
+a = 10 //allowed 
+a = nullptr //not allowed
+
+**CONST FOR STACT ALLOCATED**
+due to stack allocated memory, does not have pointers staored in memory,
+we can not change pointer anyways 
+so const always mean value of inner class are constant (like Class* const in heap allocated)
+
+you dont have pointer in stack memory 
+if you want to send object to function without coping you use referance
+
+in java there is no concept of: 
+1) inner Class const (const in java only used for poiners) (in cpp we can control which functuon const object has access to)
+2) stack meory (everything is on heap) 
+ 
+
+when you pass variable to a function
+or catch returned variable form a function
+the function copies the obejct 
+
+while returning keep note to, if varibale is created in function 
+and function return the varible by reference, it will be deleted as 
+the scope of the variable was on the function
+so its better to copy 
+or use heap allocation
+
+agrument can be send by reference as they will stay alive
+
+*when you use "int& b = a" b is reference to a and references only live in code segment they dont have actual memory (stack allcated varible dont have pointer stored in memory their pointer live in code segment,
+compiler copies direct memory address while execution) *
+
+
+r value is value that has no memory stored on stack or heap 
+it could be return value of a function that hasnt assigned to a variable 
+or it could nr a constant on code segment 
+
+"const int& a = 10" somewhat same as "const char* name = "hello" " as 10 is created on code segment, and if you declare it const 'a reference' can point to code segment and compiler will insert 10 everywhere a is
+
+static int s_val = 10;
+
+int& getValue(){
+	return s_val;
+}
+
+getValue() = 30;
+
+
+
+
+
+**************************************************************************************************************************************************88
+#include <iostream>
+#define Log(x) std::cout<<x<<std::endl 
+
+class Hello {
+public:
+	int a = 10;
+	Hello() {
+		Log("Hello");
+	}
+};
+
+
+class Entity {
+
+
+private:
+	int x = 0, y = 0;
+	Hello h;
+public:
+
+
+	Entity() {
+		Log("Entity Created");
+	}
+	Entity(const Entity& et) {
+		Log("********************COPIED");
+	}
+
+	int getX() const {
+		return x;
+	}
+	void setX(int ix) {
+		x = ix;
+	}
+};
+
+void PrintEntity(Entity* const e) {
+	e->setX(10);
+
+
+	Log(e->getX());
+}
+
+void PrintEntity(const Entity& e) {
+	//e.setX(10);
+
+
+	Log(e.getX());
+}
+int myfunction() {
+
+
+	int arr[5][5];
+
+	int total = 0;
+	for (int i = 0; i < 5; i++) {
+		for (int j = 0; j < 5; j++) {
+			arr[i][j] = total++;
+		}
+	}
+
+	return total;
+}
+
+
+static int s_val = 10;
+
+int& getValue() {
+	return s_val;
+}
+
+int getint() {
+	return 10;
+}
+
+int increment(int&& a) {
+	return ++a;
+}
+
+std::string getname() {
+	return "ketan";
+}
+
+int whatisname(std::string& name) {
+	return 0;
+}
+
+
+int main() {
+
+	whatisname(getname());
+	// it is very important why this is not possible 
+	// as getname() returns a string,
+	// that string has to be created on the current scope stack
+	// while it is not created it is in code segment (like) 
+	// (note function stack is above current stack, when we return form a function we just set stack pointer where we called the function)
+	// by saying std::sting name = getname()
+	// we reserve space on current stack (scope)
+
+	// NOW lets consider second function which takes referance of string 
+	// (if it was not a ref we could have just copyed the object into function stack)
+	// note ref is just a like variable, it is just another name 
+	// it live in code segment theat means compiler just replace it with actual address
+
+	// now as we just setting the referance to non allocated value, compiler dont know what
+	// memory address to replace ref with.
+	// its like saying (int& a = 10) there is no memory for 10 
+	// compile will insert 10 in directly code segment 
+	// by the way code or text segment is where instrunction are stored (program memroy) there is (program,stack,heap)
+	// you might say, why dont compiler just create a ref that will point to code segment
+	// i.e compiler will replace the ref with memory pointing to code segment
+	// that is possible but because code segment is not mutable (code segment is constant)
+	// if we change the varible it will not happen, some compiler will not create error but its bad
+	// so we can use const ref i.e(const int& a = 10) is allowed
+	// so if we change second function to "const std::sting& name" it will work
+
+	// also note when we create "int a = 10"
+	// what actually decompiles it 
+	// load "A63AC35" "A000000"
+	// so for compiler 'a' is just a pointer to the stack memory, it will replace a with memory address
+	// but we cant think it as a pointer,
+	// because it holds in code segment not on RAM (RAM is stack and heap)
+	// note its address is stored on code segment not its content, content is stored in stack ,
+	// thats why we can change it (address is not mutable but content is)
+
+	// that could change if we say "int* ptr = &a"
+	// now what happens is compiler create memory on stack,
+	// which currently stores address of a
+	// Note The address of ptr itself is stored on code segment which wont change
+	// not ptr is just like int, its a variable which can change (ptr = &b)
+
+	// when ever we create variable on heap, its actually a function call 
+	// compiler finds the memory at run time in heap
+	// returns the address of that memory (new keyword is used for that, we can overload it too)
+	// **and we store the address in stack**
+	// **compiler does not store the address in code segment**
+	// that means we have the pointer to memory on heap, and as we can cange the varible we have to not to do memory leak 
+	// if we do (ptr = "another address") or if we complete the scope, the stack will be deleted so does the pointer
+	// so we lost the pointer to our memory so cant delete it (that is memory leak)
+	// compiler itself cant handle memory as its expensive,
+	// java handle memroy by 'referance counting' i.e by continuously keeping track of pointer pointing to memory if no pointer is for a memory in stack that means its not accessible delete it,c++ has libraries for it
+	//(int* ptr = new int) is used to allocate memory on stack
+	// ptr will live on stack and actual int will live on heap
+	// 'delete ptr' to delete
+	// **we can do a work around by " int& a = *ptr "**
+	// now 'a' is an alias for '*ptr' jsut like compiler will replace 'a' with '*ptr'
+	// note 'a' is not store on code segment it just an alias
+	// in above example cont 'const int& a = 10' 10 was stored on code segment not 'a'
+
+	// with int& a = *ptr we can use 'a' as stack elemet
+	// again 'a' is not stored anyware, 
+	// just like in "int& a = b" 'a' is not stored anyware comiler will replace with, 
+	// "b's" code segment stored address, in assembly
+	// here 'a' will replace with stack stored '*ptr'
+	// if we use "int a = *ptr" 'a' is new variable on stack, here copy of the object is created 
+
+	// note we cant use int* ptr  = &(10) as above explanation we have to use
+	// interstingly not even "const int* = &(10)" guess no one needed that
+	// const char* ptr = "ketan"; works fine 
+	// also const int& a = 10; const int* p = &a; works
+
+
+	//if we create a class object of which, the class contain another class's object
+	// if we create heap object of outer class, even if the class contain stack object inside 
+	// it will be stored on same heap
+	// as it is counted when size of class is determined and the inner object is in contiguous memery of outer object heap
+
+	// if inner oject is heap, if we create outer class object, it will chain and reserve another heap memory for inner class 
+	// and the outer class contatins the pointer to that object
+
+
+	increment(19);
+
+	const int& a = 10;
+	const int* p = &a;
+
+	int& a = getValue();
+	a = 20;
+	Log(a);
+	Log(s_val);
+	getValue() = 30;
+	Log(s_val);
+
+	//inceremet(a)
+	//int& eklajd = getint();
+
+	Log("STACK INIT");
+	Entity e_stack; // static allocation
+	Log("e_stack created at :");
+	Log(&e_stack);
+
+	Log("STACK POINTER");
+	Entity* e_stack_pointer = &e_stack;
+
+
+	e_stack_pointer = nullptr;
+	Log("HEAP INIT");
+	Entity* e_heap_pointer = new Entity();
+	Log("HEAP OBJECT Calling copy constructor");
+	Entity e_heap = *e_heap_pointer;
+
+	Log("HEAP OBJECT REF");
+	Entity& e_heap_ref = *e_heap_pointer;
+
+
+	delete& e_heap_ref;
+	//0x0130EFB0
+
+	// override copy constructor
+	// stack memory is just a pointer 
+	// when function returns it just jumps to caller and memory pointer is jump to caller location
+
+
+
+	//Entity e;
+
+	return 0;
+}
