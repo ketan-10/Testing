@@ -1,0 +1,160 @@
+I was thinking about, What happen when I dynamically create or update DOM node in Javascript ?
+Does browser Create New layout for the entire DOM or just what updated 
+Then while searching I ended up on this page
+
+CRP (critical rendering path)
+
+when get request goes to get HTML 
+ALL HTML arrives 
+START dom creation 
+
+WE found an external CSS
+just get the CSS 
+and continue DOM tree creation 
+(but remember if even after DOM creation CSS is not arrive, we cant render as we need to join CSS and DOM (so CSS is render blocking not parser blocking))
+
+ohh no 
+WE hit JS 
+now we have to pause both parser and rendering 
+but wait our CSS is not here yet, and JS may need it so we have to Wait for that too 
+CSS is here 
+Pause everting untill JS is fetched (as JS may change DOM or need access to CSS property)
+run JS 
+continue with DOM execution 
+
+************************************************************************************
+
+1) React 
+when ever you set request for update
+maybe by setting a state -> setState() react
+or by calling invalidate -> android
+
+you trigger a re-render
+but re-render does not happen immediately 
+it just schedule a re-render
+once the current threat or execution unit is done 
+
+ex if we have multiple useEffiect(,[dep]) and useEffiect(,[dep]) all will run 
+not only one if first have setState() and sencond also have setState()
+
+***********************************************************************
+
+When we say react re render 
+We mean it is executing the components
+Which creates virtual dom
+Which will at end compared with old Virtual DOM
+And only the changes will be given to actual DOM
+
+
+Android also uses function called "invalidate()"
+To issue re-render 
+
+
+React is just a easier way to set innerHTML
+Which remember the old DOM
+
+
+And provide subscription base like system, 
+As we can use same state variable multiple time in application 
+Though its not actually subscription base as 
+Whole compound re-renders with new values
+
+
+******************************************************
+
+
+in android we have 
+
+xmls
+java 
+
+we create layout in xml 
+then we use java to get reference 
+
+whenever we update the current value of element
+android calls invalidate() so all the hierarchy knows to recalculate the layout and update
+
+ex:
+
+Button.setOnClick(){
+	Text.setText("hello");
+	invalidate();
+}
+
+we can use RX java we subscribe to a variable 
+i.e.
+if the variable can be changed by multiple means 
+we don't have to set views each time
+we can directly subscribe to the data
+
+***********************************************************
+
+React:
+
+In react whenever we update the view 
+we actually update the state
+so if the state update react knows that something is changed 
+so it re-runs the whole component logic again and create a new V-DOM and
+then the old V-DOM is compared with new V-DOM and only changes are applied to actual DOM
+
+its like a subscription model,
+like components are subscribe to state Values
+
+though
+
+***************************************************************
+
+2) in android update always goes to the top 
+as we want to recalculate layout again
+as if one element got increase that could mean change in position all the below element (maybe even upper too)
+
+if the emement is not updated and it have hard border restriction it does not need to re-render 
+only changed element have to update 
+rest will just relocated 
+
+In react we don't have to render on screen, That is done by browser
+
+browser re-calculate the whole layout again 
+
+
+***************************************************************
+
+Asp.Net
+My undestanding:
+
+1) its a templating system 
+so its use as both front and backend
+
+
+2) it *does not* target complex frount end, we have react for that
+i.e it can display user data (or table) by generating template
+but it will not be reactive, as data changing is difficult in templating system 
+we have to maintain pointers
+
+
+
+3) about services 
+
+in service model 
+we use dependency injection 
+each path have a Class 
+form this class we have GET and POST method 
+when ever GET request comes on that path, the class GET meathod will be called and we can render the templates
+
+if we requires any dependency for the page we use 
+dependency injection 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
