@@ -1,0 +1,228 @@
+async await 
+
+whenever execution continues
+
+The current thread sees a async funtion call it
+
+gets in 
+
+in that function if we see await 
+it still gets in 
+again if await still go in 
+untill we see (await on) Task 
+(or in JS sees no resovle in exection (timeout/systemTask in js))
+(i.e all promice exection is done on current thread but no resolve called)
+when that occure 
+current thread return from async function a Task<> or (promice in js)
+through out the async function chain 
+
+untill (non await)/(first call)
+then it resumes on goining execution
+
+
+
+NOTE 
+we said last await on Task 
+as promice or Task can be created before and execution on them will start immidetally 
+
+but untill we wait on them the async function will not return 
+
+
+
+IN javascript case 
+
+using await 
+we can make our single thread free 
+untill we are doing OS tasks or other async tasks
+then when the task is done It is put in event loop (just like setTimeout(()=>{},0)) 
+
+in C# UI thread can be free, so we can resize the window and etc
+
+untill the async task is done, we resume the execution with the thread 
+{
+By observation i found that the after the async task  returned 
+we should have called (pocked) UI thread that The Task is done continue with remaining task
+but i found, task is not done by UI thread
+It was picked up by the same Task thread
+i.e after await is done all the below (.then()) tasks was done by another thread
+
+
+Then I looked into 
+if we can do UI update by another Thread
+Why do we use single Thread and block update like window resize and input event 
+
+My guess is 
+ON each layout and render 
+we want the lettest and greatest information 
+so we wont't show half new and half old information 
+that may happen if layout/render thread is diffent than event thread 
+
+we should only render/layout when that event is completely done 
+
+}
+
+
+
+console.log("start");
+
+async function test(){
+    console.log("1")
+  for(let i=0;i<3;i++){
+    console.log(await new Promise((resolve, reject) => setTimeout(()=>resolve(i), 1000)));
+  }
+    
+
+}
+
+test();
+console.log("end");
+
+
+********************
+
+
+console.log("start");
+
+async function test(){
+    console.log("1")
+  for(let i=0;i<3;i++){
+    console.log(await new Promise((resolve, reject) => {for(let k=0;k<1000000000;k++){}; resolve(i) }));
+  }
+    
+
+}
+
+test();
+console.log("end");
+
+**************************
+
+
+async function test2(){
+console.log("start");
+
+async function test(){
+    console.log("1")
+  for(let i=0;i<3;i++){
+    console.log(await new Promise((resolve, reject) => {for(let k=0;k<1000000000;k++){}; resolve(i) }));
+  }
+    
+
+}
+console.log("mid");
+await test();
+console.log("end");
+}
+
+undefined
+console.log("ketan1")
+test2()
+console.log("kte2");
+
+
+***OUT**
+
+
+ketan1
+start
+mid
+1    // see it got inside await too 
+kte2
+0
+1
+2
+
+
+*****************************************************************************************************************
+console.log("start")
+let ketan = new Promise((resolve, reject) => {for(let k=0;k<1000000000;k++){}; console.log("done");resolve("ok") })
+console.log("end")
+
+*****************************************************************************************************************
+
+console.log("start")
+let ketan = new Promise((resolve, reject) => {setTimeout(()=>{for(let k=0;k<1000000000;k++){}; console.log("done");resolve("ok")},4000) })
+console.log("end")
+
+*****************************************************************************************************************
+
+
+        // as we are using c#, we can do expensive task in Task.run() as it is paralllel and we have multiple threads 
+        // but in JS we dont have multiple threads and Mostly sync task is not possible (take an example of OS operation in js they will always be async)
+        // in JS even if we are using promice our execution will go under promice too 
+        // in JS we only return from async task when exection is done and the next operation is to be performed by 
+        // OS or fetch or setTimeout etc, It's like puting everyting of bottom code in .then() in Last fetch or 
+        // which will put all bottom code in event queue, and we can give chance to render 
+        
+
+        // * async method returns a Task (promise)
+        // * putting sync code in Task.run() and async code in async function is same (i.e v3 and v4 are same)
+
+
+        // Conclusion 
+        // In C# because of multiple thread 
+        // Caller Task is returned when we see Await on Task.run()
+        // as only Task.run() will just shedule the task and execulte on differnt thread
+        // but await will tell main thread to go back and contunue wihile second thread will generate output on expensive task
+        // as we need the result form the another Thread execution, so at that point we wil awiat for The second thread output and reutrn Task for that point 
+        
+        // So whenever we call async without awiat 
+        // all the above steps happen, and we go throught nested awiat calls, till we find the situation where, we need to wait for second thread for output 
+        // at that point we return Task to caller, Where it is called without awiat 
+        // and the first thread exection continues
+        
+        // in JS because of single thread
+        // the promice is return when we see OSevent/setTimeout/Fetch which are not executable and go on the evnet queue
+
+
+        public static async Task<List<WebsiteDataModel>> RunDownloadParallelAsyncMyv3(IProgress<ProgressReportModel> progress)
+        {
+            List<string> websites = PrepData();
+            List<WebsiteDataModel> output = new List<WebsiteDataModel>();
+            ProgressReportModel report = new ProgressReportModel();
+
+            
+
+            List<Task> tasks = new List<Task>();
+            foreach(string site in websites){
+                
+                // Task will be schedule, execution thread Caller 
+                tasks.Add(Task.Run(()=>{
+                    WebsiteDataModel results = DownloadWebsite(site);
+                    output.Add(results);
+
+                    report.SitesDownloaded = output;
+                    report.PercentageComplete = (output.Count * 100) / websites.Count;
+                    progress.Report(report);
+                }));
+            }
+
+            // at this point, Caller thread will go and return Task<..>
+            await Task.WhenAll(tasks);
+
+            return output;
+        }
+
+        public static async Task<List<WebsiteDataModel>> RunDownloadParallelAsyncMyV4(IProgress<ProgressReportModel> progress){
+            List<string> websites = PrepData();
+            List<WebsiteDataModel> output = new List<WebsiteDataModel>();
+            ProgressReportModel report = new ProgressReportModel();
+
+
+            List<Task> tasks = new List<Task>();
+            foreach(string site in websites){
+                Func<Task> temp = async ()=>{
+                    WebsiteDataModel results = await DownloadWebsiteAsync(site);
+                    output.Add(results);
+
+                    report.SitesDownloaded = output;
+                    report.PercentageComplete = (output.Count * 100) / websites.Count;
+                    progress.Report(report);
+                };
+                tasks.Add(temp());
+            }
+
+            await Task.WhenAll(tasks);
+
+            return output;
+        }
