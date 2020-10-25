@@ -1,0 +1,173 @@
+# this file is too old when i was just started with SPA (single page application)
+# This is just my undestanding and I am keeping it just in case
+
+review flask case study
+read next.js documentation 
+is next.js doing double download i.e 1 to render on server side 
+and 1 to hydrate on client
+it's a mess and all mixed up
+read my old document of how browser works 
+
+
+
+client side rendering (CSR):
+	
+	Definition: 
+		client side rendering is when user data is rendered on browser,
+		On first request only the empty div is sent to the client
+		the div is populated on client side by JavaScript
+
+	1. using cli:
+		<script text = "text/babel">
+	2. using webpack:
+		convert react to pure js 
+		and bundle it to single js file 
+		single page app (as everything loaded at one time)
+		higher download requirement
+		client side routing is mostly used
+	
+	I) depends on api  (recommended)
+	request page on first time load (may or may not involve auth)
+	use api with jwt (auth) to get the data from server
+		
+		MVC architecture
+		V - client side react
+		C - server that handle routing and api
+		M - database which store have states and data
+	
+	II) injection of data(props) from server to client,
+	Its an alternative to the API architecture
+	We render on client side, but when we handle route on server side 
+	Like ('/') instead of just sending html and relay on API for user-specific data
+	we can 'inject user data into root component' 
+	
+	2 way's to inject:
+		i) create a function taking initial props (which will bundle and minified with webpack)
+		when request send the string html as 
+			"<html> <div id='app'>
+				<script> render_inject(${mypros})</scipt> 
+				<script src='bundle.js'> 
+			</html>"
+		ii) Inject with window object and look for window object in 
+		    Main componets, and take props form it
+		    eg. <script>window.__INITIAL_PROPS__ = JSON.stringify(${passed_props})</script>
+	    Note : 
+		Can also be used for server side rendering 
+		ref: https://stackoverflow.com/questions/50264943/how-to-access-the-props-from-server-side-rendering-when-re-render-the-component
+
+	NOTE: It will require JWT auth on get request
+	database fetching is done along with first get request
+	
+	ref: https://davisonpro.dev/an-advanced-guide-on-how-to-setup-a-react-and-php/
+		
+
+	CSR is recommended for starting with react, as it is independent of 
+	backend application "Just bundle the js with webpack" and
+	include script as "<script src='bundel.js'>"
+	
+server side rendering:
+	render on server side
+	...To be continue-	
+	SCO
+	2 times render 
+	we need react on client side too
+	didnt have to wait for js 
+	browser directly renders HTML as it comes
+	next.js 
+	client side routing	
+
+
+
+HOW REACT INJECT TO RECONCILER :-
+react injection, dispatch 
+
+before reactDOM.render is called
+React work is just to create React classes with specific parameter
+
+reactDOM will tell React what to do 
+but.. 
+how what about useState..
+we know useState is in React and it also calls render
+which is a ReactDOM function or more specifically reconciler funtion
+
+can as ReactDOM takes React as a input parameter 
+of course ReactDOM can call React function..
+and i thought its not possible vice versa..
+but it is i am dumb, 
+React Use injection, dispatch 
+
+after React jsx is passed to ReactDOM 
+ReactDOM(reconciler) will inject its functions into React
+
+then whenever a event happed and react function is called by ReactDOM
+React will inversely call ReactDOM function which was dispatched to it
+
+
+
+
+React Compare to Flask:
+
+Flask 
+Difficult to divide frontend and backend
+On each request re have to render a request I.e. loop through prepare result so much task on server
+
+React - client side rendering
+What if we depend on api request
+On first request we common page
+User browser request through restful api
+Using JWT tokens 
+
+But there is problem as javascript becomes difficult 
+We have to maintain so many elements ID
+If data is table and a specific value is to be changed 
+Either we have to update whole table or keep Id 
+Of all values
+
+React keep track of all dom
+Called virtual dom
+It automatically finds values that changed
+By comparing past and current virtual dom 
+
+Only render that specific part
+
+
+Flask-server vs Node-React-Client
+
+Flask 
+Difficult to divide frontend and backend
+On each request re have to render a request I.e. loop through prepare result so much task on server
+
+React - client side rendering
+What if we depend on api request
+On first request we common page
+User browser request through restful api
+Using JWT tokens 
+
+But there is problem as javascript becomes difficult 
+We have to maintain so many elements ID
+If data is table and a specific value is to be changed 
+Either we have to update whole table or keep Id 
+Of all values
+
+React keep track of all dom
+Called virtual dom
+It automatically finds values that changed
+By comparing past and current virtual dom 
+
+Only render that specific part
+
+only one time auth is important then we can store the access in session or cookie to auth all next time
+all next time auths are handle by us not by google
+for user we are api and google is api to us
+hence google is hyperapi hence google provide us access and refresh token not to access by use, but for us to access google api's 
+1) backup text, browser 4 written paper, ahire code, react notes, angular 1 xss code sample 
+2) Same origin policy 
+3) jwt can be store in cookies or it can be accessed via get parameter 
+4) session is not good as it is not stateless, i.e we only one server has access to the session, and server store all the information which is combined with session id which is checked, not good with technology like docker where server changes time to time, so we needed state less tech that was jwt, jwt store all user data within it which is locked by secret key, witch is stored on server
+5) review flask project 
+6) to make jwt versatile it is one developer to store it in cookie or in local storage or javascript memory
+7) local storage is prone to xss
+8) cookies are prone to csrf  
+9) there is no simple way to solve wt-form post request to other page in flask, that mean if you are using wtfrom validation and you want to show errors on the same page, and if everything is validated redirect to view profile with the current post data, then its not easy as redirect is a specific 300 series request to browser server not calling the function, so the way we can solve it by IF the form is validated store in database and redirect to another page with it get payload as the id or something then refresh the data from that path, and there check is the user is authorize (not authenticate) to access the path and re-fetching form database.
+https://stackoverflow.com/questions/39765548/form-validation-in-another-route-flask somewhat solves the problem but errors can't be shown on same page
+ 11) its always important to put routes, as the link is shareable, whole web is build on the fact that it can be shared, so don't always query in post use get parameter or route too, if you use post to search for profile the path will not show anything, while get will show
