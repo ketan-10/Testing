@@ -32,18 +32,67 @@ suspend fun main(){
 
         }
     }.map{     // returns a new flow with filter
-        "$it "
+        "$it ->"
     }
+
+
+
+    val ketanMapFlow : Flow<String> = flow {
+
+//        emit("A") -> once when collected
+        f.collect { value ->         // in case of actually 'map' it will be extension method, so we can directly call 'collect' which will call the collect method of flow where we called using "(flow).map"
+
+//            return@collect emit(traform(value))
+            return@collect emit("$value ketan    ")   // mapping tranform function
+        }
+    }
+
+    ketanMapFlow.collect (object :FlowCollector<String> {
+        override suspend fun emit(value: String) {
+            print(value)
+        }
+    })
+
+//    output :   A -> ketan    B -> ketan    C -> ketan
+
+    print("\n")
+    /**
+     *    flow(()->{
+     *      collect(()->{
+     *
+     *      })
+     *    })
+     *
+     *
+     */
+
+//    public suspend inline fun <T> Flow<T>.collect(crossinline action: suspend (value: T) -> Unit): Unit =
+//        collect(object : FlowCollector<T> {
+//            override suspend fun emit(value: T) = action(value)
+//        })
+
 
     f.buffer().collect(object :FlowCollector<String> {
         override suspend fun emit(value: String) {
             print(value)
         }
     })
+
+//    output :   A ->B ->C ->
+
+    print("\n")
     flowOf("A", "B", "C")
         .onEach  { println("1$it") }
         .buffer()  // <--------------- buffer between onEach and collect
         .collect { println("2$it") }
+    /**
+    1A
+    2A
+    1B
+    2B
+    1C
+    2C
+     */
 }
 
 fun foo2(){
