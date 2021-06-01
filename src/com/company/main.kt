@@ -22,6 +22,33 @@ suspend fun main2() = coroutineScope {
 
 @InternalCoroutinesApi
 suspend fun main(){
+    
+    
+    // Instead of overriding two maps -> 1) suspend map & map
+    // we use map function as inline -> that way we pass inline map a function which will use context of parent
+//     //but there is issue, inside map we don't know the function is suspend or not
+//     //and if one function tries to pass its input lambda to another and that function calls it it will be calling an
+//     //suspend function inside non suspend method
+
+    // this will be an error
+//    inline fun lambdainput2(transform: (String) -> String){
+//        lambdainput(transform,"");
+//    }
+//    fun lambdainput(transform: (String) -> String, name:String){
+//        print("Hello")
+//    }
+    val a:List<String> = listOf("A","B","C").map {
+        compute(it);
+    }
+    val b:Flow<String> = flowOf("A","B","C").map {
+        compute(it);
+    }
+
+    // take first n flow -> not optimized as on collect it calls all emmit
+    // when collect is called, all data will be emitted
+
+
+    
     var f : Flow<String> = object : Flow<String> {
         override suspend fun collect(collector: FlowCollector<String>) {
 
