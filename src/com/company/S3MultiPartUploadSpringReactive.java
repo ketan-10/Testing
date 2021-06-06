@@ -49,6 +49,10 @@ import software.amazon.awssdk.services.s3.model.UploadPartResponse;
  * S3 FileAsyncRequestBody (putObject) (Publisher) : https://github.com/aws/aws-sdk-java-v2/blob/master/core/sdk-core/src/main/java/software/amazon/awssdk/core/internal/async/FileAsyncRequestBody.java
  * S3 FileAsyncResponseTransformer (getObject) (Subscriber) : https://github.com/aws/aws-sdk-java-v2/blob/master/core/sdk-core/src/main/java/software/amazon/awssdk/core/internal/async/FileAsyncResponseTransformer.java
  *
+ * // if we convert the arrayList of completable future to Flux,
+ * // "Flux is for streaming" but the "List of completable future is for parallel"
+ * // https://stackoverflow.com/a/49494849/10066692
+ *
  */
 @RestController
 @RequestMapping("/inbox")
