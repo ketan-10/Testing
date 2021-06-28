@@ -11,3 +11,5 @@ with [Mapped Types](https://www.typescriptlang.org/docs/handbook/2/mapped-types.
 [StackOverflow](https://stackoverflow.com/a/49725198/10066692) :  Type Hell With [Utility Types](https://www.typescriptlang.org/docs/handbook/utility-types.html)
 
 [Typescript Official Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
+
+[Fun with advanced TypeScript](https://www.youtube.com/watch?v=nNse0r0aRT8)
