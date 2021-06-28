@@ -1,0 +1,13 @@
+
+Providing Javascript Object as templated type, with auto Generic template Infer
+
+[StackOverflow](https://stackoverflow.com/questions/54598322/how-to-make-typescript-infer-the-keys-of-an-object-but-define-type-of-its-value)
+
+[TypeScript playground link](https://www.typescriptlang.org/play?jsx=0#code/PTAEBkFMBcHIGdQHMCWA3SoCGoB2WBbTaAe1GgAsVFoBPAB0gCgVdpIAnAMywGNMAogBtIRNgBUGmAN5NQeEgBNI8AFx4ArgQBGnADRzQ8WgSLQOKXgH512kiRFZcTAL5MmIUBUhDGHUFwauLzQKCS4oADuVLwUoKxcnIgA1pC0iE6KoBwq5pbQiGhYQhoq5GTCopASUky84fDQ2PCVYtCSjIgAvKAAPOIAfAAUMOrSoADaANLxEam0JFyg4gC66q3V7VKgLgCUoF0DoDAA3O71uI3HIm3wHZBZPVgtN5v38EOy8vAAjhpYOTGCmUalAABY9EYTGYLLx1OZSjsDPI8k4kCIgbglCp1ABmJGGISsSCY7GggBMkKx0AAytCYLD1DwhPBMMAAFTHDgcEj+aKcTALDRRJxNFBNdnAFygVy7M7uVjsbh8TAACR8QjIX0m81A6kaFlwSDWoA2NUYrnODSaPiqbDuUkU5L1oHVQk1PW1v3+gNA4yxIPUEKhpgZlnhHERLmR5AsaIxfuBONA+OjhOJpMDoEpClp9LycICxVZoA5XJ5fO8OVAQpFbHiEqlMpcJyAA)
+
+[My Undestanding](https://www.typescriptlang.org/play?#code/FAFwngDgpgBAElMAeA8gGgNIygDxFAOwBMBnGEkAJwEsCBzGAMhgGtEB7AMxhQD4YAvDADeAbQAqMWjAwBdAFwpRcgL6hIsBGABMqTNjyFS5KrQbM2YLj35CxlqQRkKlq4MADG7AhRgALKAAbQPYYeXhEJGFWKBAAQwJ5AEYABjQYCHZ2ACs4+W0UlTQAcjZ4gmKAH2LMnLji3jtgGBaYUtiE4vDUtGbWmqzcroLgNXVoCLAAZj0MWxFRB2lLaxQXRcRZMfAJjA6CVAN8YjJ7REdnRWUt-Vxj4woaenmACloIAFcQeQwASkF+K5ZABudxeHwgGD4XxCQ53IynDZgC5yK6qW6GE4mJ50XgvdgAI2y4XQ7y+P3+JOuAJEfRalFiH0oTkJ2VEZJAINGoNAUAoL2ERWKAWC7GKv3cQA) 
+with [Mapped Types](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
+
+[StackOverflow](https://stackoverflow.com/a/49725198/10066692) :  Type Hell With [Utility Types](https://www.typescriptlang.org/docs/handbook/utility-types.html)
+
+[Typescript Official Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
