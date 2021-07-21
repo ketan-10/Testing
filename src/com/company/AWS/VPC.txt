@@ -1,0 +1,38 @@
+
+check "vpc-image.jpg"
+
+AWS: 
+https://www.youtube.com/playlist?list=PLv2a_5pNAko0Mijc6mnv04xeOut443Wnk -> VPC 
+https://start.jcolemorrison.com/aws-vpc-core-concepts-analogy-guide/ -> VPC
+
+
+NAT is used to provied only outbound trafic and it's response for private subnet, so the services in private subnet can download updates etc
+**
+Egress-only Internet gateway works as a NAT gateway, but for IPv6 traffic. 
+An egress-only Internet gateway is for use with IPv6 traffic only. 
+To enable outbound-only Internet communication over IPv4, use a NAT gateway instead.
+**
+
+VPC-> like a city
+a private subsection -> logically isolated section
+
+('VPC')<- one to one ->('internet-gateway')
+each vpc can have one or zero ineternet gateway
+its created by default when VPC is created
+
+('VPC')<- one to many ->[('route-table')]
+one vpc can have many route-table
+a 'main' route table is created on VPC creation
+
+
+('route-table')<- one to many ->[('subnet')]
+a subnet must have a asigned route-table
+if in subnets route table there is internet gateway also then its a public subnet
+
+
+*'Security groups' are applied to AWS services*
+*'Network ACLs' are applied to Subnets*
+
+'Route Table' vs 'Network ACLs' 
+-> RT just specifies where corresponding trafic shoud go next, and what is visible
+-> NACL specifies what inboud and outbound traffic is allowd 
