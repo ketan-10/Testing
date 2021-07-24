@@ -5,6 +5,49 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 
+
+//        CompletableFuture only passes through the 'then' chain/ tree once
+//        where as flow in for continuous data, like timer, WebSocket, database read(one by one), reading or uploading file
+//        it works on 'Consumer request n object' -> Provider then calls onNext 'n' times.
+//
+//        Lazy / Cold:
+//        Element are only generated when 'Consumer'(next in chain) ask for it.
+//        And if you subscribe multiple time -> each will create a different unique stream, with independent elements
+//
+//        Hot:
+//        Immediately starts, Don't wait for the subscriber,
+//        all subscribers get the same element,
+//        Only one steam for all subscriber,
+//        If the subscriber does not request the element, it is stacked as a backpressure, till the size is reached.
+//
+//        CF:
+//        for completable future you will create a future for each data entity, and they will be running in parallel
+//        where as in flow there is stream of data which goes through pipeline
+//
+//        JavaScript:
+//        java flux vs js generator -> generator waits for the element to process before asking for next element
+//        i.e backpressure is responsibility of the sender.
+
+        // Here Completable future is used for doing things in parallel
+        // And RX for doing it in flow (stream) -> Data will come in as a pipe, one after another
+        // Even though all the CompletableFutures are running in parallel, Node that all the callbacks are running on Main thread
+
+        // MONO from future will wait for future to complete (CompletableFutures are 'hot')
+        // and MONO it will emmit when it is subscribed (Mono is cold)
+        // but on each subscribe it will give the same future
+
+//         * Code Help From : https://www.baeldung.com/java-aws-s3-reactive#2-handling-a-single-file-upload
+//         * Marble Diagram: https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Flux.html
+//         * Reactive Streams Specification: https://github.com/reactive-streams/reactive-streams-jvm
+//         * S3 FileAsyncRequestBody (putObject) (Publisher/Provider) : https://github.com/aws/aws-sdk-java-v2/blob/master/core/sdk-core/src/main/java/software/amazon/awssdk/core/internal/async/FileAsyncRequestBody.java
+//         * S3 FileAsyncResponseTransformer (getObject) (Subscriber/Consumer) : https://github.com/aws/aws-sdk-java-v2/blob/master/core/sdk-core/src/main/java/software/amazon/awssdk/core/internal/async/FileAsyncResponseTransformer.java
+
+        // if we convert the arrayList of completable future to Flux,
+        // "Flux is for streaming" but the "List of completable future is for parallel"
+        // https://stackoverflow.com/a/49494849/10066692
+
+//      https://github.com/ketan-10/aws-lambda-test
+
 public class Main {
 
     public void subscribe(Function function){}
