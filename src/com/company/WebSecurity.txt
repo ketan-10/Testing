@@ -1,0 +1,87 @@
+Cross Site Resource Forgery (CSRF):
+  Attack: 
+    Attacker creates a site with a 'form' which has submit url as target-site url,
+    So as the user clicks on submit button, or site send's with javascript submit (may work)** (in Limitation)
+    Browser send the target-site cookie, if user loggedin in target-site  
+    for example attacker site can even delete or insert on users behalf.
+  Limitations: 
+    1) Attaker site can not 'Query',
+    As the requset get sent to target-site, but broweser dont not send the response back to attacker-site, due to same-origin-policy
+    2) only works with "application/x-www-form-urlencoded" and similar called, but does not work with "not-so-simple requests"
+    details in link : (https://stackoverflow.com/questions/33261244/why-same-origin-policy-isnt-enough-to-prevent-csrf-attacks)
+    or (https://stackoverflow.com/a/11024387/10066692)
+  Prevention: 
+    1) many web frameworks provide CSRF tokens ->
+    front end will come with a CSRF token with form 
+    which will check on backend if it's valid only then req is successful.
+    2) Insted of storing 'user session token' in cookie, store it in 'local-storage' or 'memory'
+    and use prevent-default on forms and send forms form javascript with token as payload.
+    This is common in JWT, (but the limitation here is, possiblility of XSS attack, token can be stolen)
+    
+Cross Site Scripting (XSS):
+  Attack: 
+    If your site have xss vulnerability, i.e other can execute inject javascript and execute in your site.
+    Someone can set there name as <img src='x' onError={//send toekn to attacker-site}>
+    This way attacker can get token of everyone who visite its profile.
+  Limitations: 
+    XSS can only access local-storage data, and memory only if it is in javascript global scope,
+    http-only cookies can't be accessed with javascript.
+  Preventions: 
+    new Frameworks now convert special caraters like <,>,/, as pure text(string), insted of code.
+    Dont inject user-data to DOM.
+    
+Javascript Web Token (JWT):
+  Problem: 
+    Due to microservices, and distributed systems
+    It is hard to determine which server user will connect to,
+    so older solutions like, User session key store in cookie with data in server-database associated with the key,
+    Does not work, as it is not guarantee the user will again connect to same server.
+  Solution:
+    So mostly we use JWT, i.e we store the session data directly on client side(cookie or local-storage or memeory) itself including timeout.
+    Now you might think then user can just change the session data on browser.
+    That's why we 'encode' it with 'secrate key' 'store in all microservices instances'
+    Anyone can 'decode' the message with publicly. so that on client side also we can read the data.
+    But it is can validated with 'secrate key', jwt function return true or false. 
+    That way we can make sure data validity on server side
+
+
+Access & Refresh Token: 
+  Why use Refresh Token:
+    1) https://stackoverflow.com/questions/3487991/why-does-oauth-v2-have-both-access-and-refresh-tokens/12885823#12885823
+    2) https://stackoverflow.com/questions/38986005/what-is-the-purpose-of-a-refresh-token
+
+
+Oath2:
+  [What is OAuth 2.0 and OpenID Connect?] by Defog Tech (https://www.youtube.com/watch?v=LyqeHAkxVyk)
+  We can access User Resources on its behalf.
+  When User lands on our page, we re-direct him to google/any oauth provider page, with callback-URL in URL query.
+  When user grants permission, Oauth provider re-directs the user to our site with refresh-token as payload.
+  
+  We can use the refresh-token to get access-token from google, from our backend only, (not on client side)
+  // it is like the (Access & Refresh Token for our application, but here our server is client and google is server)
+  
+  From access token we get User name and profile, and we know it's correct as we got it from google, 
+  No we can give access to our User by sending him our own JWT-refresh-Key (or session key, any)
+  The above is example of OpenID Connect
+  OpenID Connect came from Oauth2. to use Oauth2 as a SSO(Single Sign On)
+  
+  We can also store the Access-Token in our database, so that we can ask for User Profile or any data, 
+  Even after user has left.
+
+I used SAML which is older technology to Oauth2:
+  ReadMe of [https://github.com/ketan-10/SpringBootSamlAuthTest]
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
