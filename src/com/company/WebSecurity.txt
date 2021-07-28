@@ -73,6 +73,31 @@ I used SAML which is older technology to Oauth2:
   
   
   
+Why we need 2 tokens: 
+
+  Even after CSRF attack
+  attacker cant get access-token as it can send request with refresh-token from cookie but cant read the response.
+
+  Even if attacker manage to make CSRF attack, and send unwanted request on user-behalf with cookie
+  the cookie contains refresh-token, so only valid request using cookie is to get access-token,
+  but due to CORS user can not get the response of query. so it can not get access-token.
+
+  once the access-token granted, authentication service does not have to be involved 
+  till the next access-token is to be required.
+
+  having 2 token means 
+  we can store access-token in js or local-storage -> vulnerable to XSS
+  but even on XSS it will be short lived 
+
+  second token is more important i.e refresh token -> vulnerable to CSRF
+  but we can't send any commnads via refresh token, it's only used to get new access token 
+  but 'query' is no vulnerable to CSRF 
+
+  also
+  if we had only one token
+  for each resource request, we had to check with authentication service 
+  is this token revoked or not, so authentication service might get overload
+  
   
   
   
