@@ -1,0 +1,44 @@
+* {
+  box-sizing: border-box;
+}
+
+body{
+  margin: 0;
+}
+
+.hero {
+  background: #23424A;
+  color: white;
+  /* not adding zero padding stays the same
+    as we are centering the .container, but it creates huge padding on mobile screens 
+  */
+  padding: 5em 0;
+}
+
+.container {
+  max-width: 60em;
+  margin: 0 auto;
+  font-family: 'Roboto Black';
+}
+
+.intro {
+  width: 50%;
+}
+
+
+p {
+  font-family: 'Roboto Regular';
+  color: #8F9BB3;
+}
+
+
+button {
+  background: #38CFD9;
+  border: none;
+  padding: 1em 2em;
+  border-radius: 2em;
+  margin: 1em 0;
+  font-family: 'Roboto Bold';
+  font-weight: bold;
+  color: #23424A;
+}
