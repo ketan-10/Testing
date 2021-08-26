@@ -1,9 +1,13 @@
-* {
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap');
+
+/* before and after as pseudo elements */
+*, *::before, *::after {
   box-sizing: border-box;
 }
 
 body{
   margin: 0;
+  font-family: 'Roboto', sans-serif;
 }
 
 .hero {
@@ -18,27 +22,35 @@ body{
 .container {
   max-width: 60em;
   margin: 0 auto;
-  font-family: 'Roboto Black';
+  width: 80%;
 }
 
 .intro {
-  width: 50%;
+  width: 60%;
 }
 
-
-p {
-  font-family: 'Roboto Regular';
+/* BEM naming system https://www.youtube.com/watch?v=SLjHSVwXYq4 */
+.intro__body {
   color: #8F9BB3;
+  /* margin is on paragraph not button as, button might be re-usable */
+  margin-bottom: 3em;
 }
 
 
-button {
+.intro__button {
   background: #38CFD9;
-  border: none;
+  text-decoration: none;
+  text-transform: uppercase;
   padding: 1em 2em;
   border-radius: 2em;
-  margin: 1em 0;
-  font-family: 'Roboto Bold';
+  /* as a tag is inline by default -> and for inline margin does not work */
+  /* https://stackoverflow.com/questions/47902021/why-margin-top-does-not-work-in-anchor-tag-but-in-button-in-works */
+  display: inline-block;
   font-weight: bold;
   color: #23424A;
+}
+
+.intro__button:focus,
+.intro__button:hover {
+  opacity: .75;
 }
