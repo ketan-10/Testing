@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap');
+
+body{
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* https://www.youtube.com/watch?v=WlGQdgy-M6w */
+*, *::after, *::before {
+  box-sizing: inherit;
+}
+html {
+  box-sizing: border-box;
+}
+
+.hero__title {
+  font-size: 3em;
+}
+
+.hero__body{
+  font-size: 1.2em;
+  margin-bottom: 3em;
+}
+
+
+.hero__button{
+  background: #38CFD9;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #3A3A3A;
+
+  display: inline-block;
+  border-radius: 1.5em;
+  padding: 1em 2em;
+}
+
+.hero{
+  background-color: #23424A;
+  color: white;
+  padding: 7em 0;
+}
+
+.container {
+  margin: 0 auto;
+  width: 80%;
+  max-width: 65em;
+}
+
+.intro{
+  width: 60%;
+}
+
+.hero__button:hover, 
+.hero__button:focus {
+  opacity: 70%;
+}
+
+.row{
+  text-align: center;
+  padding: 3em 0;
+}
+
+.row--info h1 {
+  font-size: 2em;
+  color: #87629A;
+}
+
+.row--discription h1 {
+  font-size: 2em;
+}
+
+
+.row--discription {
+  background: #136C72;
+  color: white;
+}
+
+.flex {
+  display: flex;
+  gap: 2em;
+}
