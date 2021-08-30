@@ -25,6 +25,16 @@ func main() {
 	}
 	fmt.Println(data)
 
+	
+	// bwc := BufferedWriterCloser{
+	// 	buffer: bytes.NewBuffer([]byte{}),
+	// }
+	// var bi WriterCloser = bwc;
+
+	// cant be permited as 'write' method is pointer receiver
+	// and if 'write' method modifies the value bwc will not be modified.
+	// https://stackoverflow.com/questions/33587227/method-sets-pointer-vs-value-receiver
+
 }
 
 type Writer interface {
@@ -65,7 +75,7 @@ func (b *BufferedWriterCloser) Write(p []byte) (int, error) {
 	return n, nil
 }
 
-// 😮😮
+// 😮😮 -> if no pointer, creates new object; if pointer use the same object
 // func (b *BufferedWriterCloser) Close() error {
 func (b BufferedWriterCloser) Close() error {
 	b.buffer = nil
