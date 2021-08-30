@@ -1,0 +1,14 @@
+when you write 
+int a = 10
+print(a)
+when program compiles there is no `a` 
+everwhere `a` is written compiler will replace it with memory address of where 10 is store.
+
+also there are 3 types of memory
+1) code => where binary commands are witten and cpu read it, in a=10, 10 is stored in code memory
+
+2) stack => the known memory a object or execution block will need, 
+it's kept track by just a single pointer, each execution thread have it's own stack, unless its goland 😆,  stack size is known at compile time, so that when some object is created, stack pointer moves up by that amount, same if a function returns it goes down to privous location, compiler write hard coded value of which location to jump in assembly at 'return' statement 
+
+3) heap => it's huge, expandable memory , which will be shared in all application, and garbage collector keep track of total pointers, that point to heap memory, so that it can be freed, 
+garbage collector basically have to check stack and all heap whose address is stored in stack, and all tree till the end, as a heap whose address is stored in stack Can hold address of another heap, we dont want to delete that
