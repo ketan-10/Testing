@@ -29,12 +29,14 @@ body {
   gap: 3em;
 }
 
-.row--header {
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.header__box {
+  /* display: flex; */
+  /* gap: 3em; */
+  /* flex-direction: column; */
+  /* justify-content: center; */
+  /* align-items: center; */
 
-  min-height: 40em;
+  padding: 15em 0;
   width: min(80%, 40em);
   margin: 0 auto;
   gap: 0;
@@ -76,7 +78,7 @@ header {
   margin-bottom: 1.2em;
   font-size: 2.25rem;
 }
-.row--primary{
+.primary__content{
   font-size: 1.3rem;
 }
 
@@ -93,7 +95,6 @@ header {
   color: #F3EED9 ;
 }
 
-
 /* .info__img{ */
   /* align-self: flex-start; */
   /* flex-grow: 1; */
@@ -103,17 +104,28 @@ header {
   /* width: 100%; */
 /* } */
 
+
 .info--first__section{
   /* flex: 1; */
-  flex: 1 1 0px;
   /* width: 100%; */
+  flex: 1 1 0px;
 }
 
 .info__image-container {
-  /* flex: 1; */
+  /* width: 100%; <- does not work for small screens */
   flex: 1 1 0px;
 }
 
 .info--second {
   background: #824936;
+}
+
+.info--second > .row {
+  flex-direction: row-reverse;
+}
+
+@media (max-width: 600px) {
+  .row {
+    display: block;
+  }
 }
