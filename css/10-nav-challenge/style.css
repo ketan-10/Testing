@@ -134,7 +134,17 @@ header {
 
 .nav__list {
     list-style: none;
+    padding-left: 0;
 }
+
+.nav__list--primary {
+    margin-bottom: 2em;
+}
+
+.nav__item {
+    margin-top: .5em;
+}
+
 .nav__link {
     text-decoration: none;
     color: white;
@@ -143,8 +153,16 @@ header {
     font-size: 1rem;
 }
 
-.nav__list--primary {
-    /* margin: 0 auto; */
+.nav__link:hover,
+.nav__link:focus {
+    opacity: .75;
+}
+
+.nav__link--button {
+    background: white;
+    padding: .25em .75em;
+    border-radius: .75em;
+    color: #23424A;
 }
 
 .logo {
@@ -193,6 +211,7 @@ header {
         visibility: visible;
         display: flex;
         height: auto;
+        align-items: center;
         position: relative;
         justify-content: space-between;
     }
@@ -225,9 +244,12 @@ header {
         gap: 1em;
         margin: 0;
     }
-    
+
     .nav__list--primary {
         margin: 0 auto;
+    }
+    .nav__item {
+        margin-top: 0;
     }
     
     
