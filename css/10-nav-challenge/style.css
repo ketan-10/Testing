@@ -132,6 +132,20 @@ header {
     position: relative;
 } 
 
+.nav__list {
+    list-style: none;
+}
+.nav__link {
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.nav__list--primary {
+    /* margin: 0 auto; */
+}
 
 .logo {
     height: 30px;
@@ -179,12 +193,13 @@ header {
         visibility: visible;
         display: flex;
         height: auto;
+        position: relative;
+        justify-content: space-between;
     }
 
     .row {
         display: flex;
         justify-content: space-between;
-
     }
 
     .hero__text {
@@ -203,6 +218,16 @@ header {
 
     .sidebar {
         width: 32%;
+    }
+
+    .nav__list {
+        display: flex;
+        gap: 1em;
+        margin: 0;
+    }
+    
+    .nav__list--primary {
+        margin: 0 auto;
     }
     
     
