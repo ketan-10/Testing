@@ -59,20 +59,21 @@ header {
   /* font-size: 5vw; */
   /* font-size: min(3.5rem, 5vw); not work for mobile */
   /* font-size: min(3.5rem, max(5vw, 2rem)); */
-  font-size: clamp(3.5rem, 5vw, 2rem);
+  /* font-size: clamp(3.5rem, 5vw, 2rem); */
+  font-size: clamp(2rem, 5vw, 3.5rem);
   margin-top: 0px;
 }
 
 .primary{
   /* margin: 2em inherit; <- set margin top-bottom and inherit auto, didn't worked-out */
-  padding: 2em 0;
+  padding: 5em 0;
 }
 
 .primary__title {
   font-family: 'Playfair Display Black', serif;
   color: #824936;
   text-align: center;
-  margin: 1.2em;
+  margin-bottom: 1.2em;
   font-size: 2.25rem;
 }
 .row--primary{
@@ -93,12 +94,24 @@ header {
 }
 
 
-.info__img{
-  align-self: flex-start;
-  /* flex-grow: 1;
-    flex-basis: 0; 
-  */
-  width: 100%;
+/* .info__img{ */
+  /* align-self: flex-start; */
+  /* flex-grow: 1; */
+  /* width: 100%; */
+  /* max-width: 0; */
+  /* flex: 1  */
+  /* width: 100%; */
+/* } */
+
+.info--first__section{
+  /* flex: 1; */
+  flex: 1 1 0px;
+  /* width: 100%; */
+}
+
+.info__image-container {
+  /* flex: 1; */
+  flex: 1 1 0px;
 }
 
 .info--second {
