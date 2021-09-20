@@ -167,8 +167,15 @@ nav {
 
 /* section two */
 
+.section-two {
+  padding: 4em 0;
+}
+.section-two__primary {
+  margin-bottom: 2em;
+}
 .section-two__pri-title {
   color: #A59678;
+  margin-top: 0;
 }
 
 .section-two__pri-content {
@@ -199,10 +206,6 @@ footer {
   color: white;
 }
 
-.footer-section__title {
-  /* color: white; */
-  font-size: 1.2rem;
-}
 
 .footer-section__content {
   font-size: 0.9rem;
@@ -211,6 +214,7 @@ footer {
 }
 
 .footer-section__title {
+  font-size: 1.2rem;
   color: #A59678;
   margin: 0;
 }
@@ -222,7 +226,18 @@ footer {
   line-height: 1.8;
 }
 
-@media (min-width: 700px) {
+/* small to medium */
+@media (min-width: 750px) and (max-width: 1200px) {
+
+  /* hero */
+  .hero__details {
+    width: 60%;
+  }
+}
+
+/* bigger than small 😂 */
+@media (min-width: 750px){
+
   /* nav */
   .container--nav{
     display: flex;
@@ -246,5 +261,77 @@ footer {
     display: flex;
     gap: 1em;
   }
+
+  /* section one */
+  .container--section-one {
+    display: flex;
+    gap: 1em;
+    justify-content: space-between;
+  }
+  .section-one__box {
+    max-width: 14em;
+  }
+  /* section-two */
+  .section-two__primary {
+    margin-bottom: 0;
+  }
+  /* section two sidebar */
+  .section-two__sidebar{
+    display: flex;
+    gap: 1em;
+  }
+  
+  /* footer */
+  .footer__title {
+    /* color: white; */
+    text-align: center;
+  }
+  
+  .footer__links {
+    display: flex;
+    justify-content: space-between;
+    gap: 2em;
+  }
+  .footer-section--primary {
+    width: 50%;
+  }
+
+}
+
+/* large */
+@media (min-width: 1200px) {
+
+  /* hero */
+  .container--hero {
+    display: flex;
+    gap: 3em;
+  }
+  .hero__details {
+    align-self: center;
+  }
+  .hero__title, .hero__details {
+    flex: 1 1 0;
+    /* width: 50%; */
+  }
+
+  /* section-two */
+  .container--section-two {
+    display: flex;
+    gap: 3em;
+  }
+  .section-two__sidebar {
+    flex-direction: column;
+  }
+  .section-two__side-box {
+    margin: 0;
+  }
+  /* footer */
+
+  .footer__info {
+    display: flex;
+    gap: 1em;
+    justify-content: space-between;
+  }
+
 }
 
