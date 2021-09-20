@@ -35,6 +35,7 @@ nav {
   height: 3em;
   background: #14161d;
   border-radius: 50%;
+  position: absolute;
 }
 
 .nav-toggle:hover,
@@ -90,6 +91,7 @@ nav {
 }
 .nav__list {
   list-style: none;
+  padding-left: 0;
 }
 
 .nav__link {
@@ -123,7 +125,7 @@ nav {
 }
 
 .hero__title {
-  font-size: 3em;
+  font-size: clamp(1em, 8vw,3em);
   margin-top: 0;
   font-weight: 750;
 }
@@ -247,6 +249,7 @@ footer {
   .nav, .nav--hidden {
     display: flex;
     align-items: center;
+    gap: 3em;
   }
 
   .logo, .nav__item, .nav__list--secondary {
