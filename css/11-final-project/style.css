@@ -118,15 +118,113 @@ nav {
 
 .hero {
   background: #3B4050;
+  padding: 3em 0;
+  color: white;
+}
+
+.hero__title {
+  font-size: 3em;
+  margin-top: 0;
+  font-weight: 750;
+}
+
+.hero__title > span {
+  color: #A59678;
+}
+
+.hero__content {
+  color: #b4b4b4;
+}
+
+.hero__button {
+  padding: 1em 2em;
+  border-radius: 2em;
+  border: 0;
+  font-weight: bold;
+  font-size: 1rem;
+  color: white;
+  background: #A59678;
+  text-transform: uppercase;
+
+}
+
+/* Section one */
+
+.section-one {
+  background: #e9e9e9;
+  padding: 2em 0;
+  text-align: center;
+}
+
+.section-one__title {
+  color: #A59678;
+}
+
+.section-one__content {
+  color: #454850;
+  font-size: 1.2rem;
+}
+
+/* section two */
+
+.section-two__pri-title {
+  color: #A59678;
+}
+
+.section-two__pri-content {
+  color: #454850;
+  font-size: 1.2rem;
+}
+
+/* section-two sidebar */
+
+.section-two__side-box {
+  background: #3B4050;
+  color: white;
+  text-align: center;
+  padding: 1em;
+  margin: 1em 0;
+}
+
+.section-two__side-box__content {
+  font-size: 1rem;
+  color: #b4b4b4;
+}
+
+/* footer */
+
+footer {
+  background: #3B4050;
   padding: 1em;
   color: white;
 }
 
+.footer-section__title {
+  /* color: white; */
+  font-size: 1.2rem;
+}
 
+.footer-section__content {
+  font-size: 0.9rem;
+  color: #b4b4b4;
 
-@media (min-width: 800px) {
+}
+
+.footer-section__title {
+  color: #A59678;
+  margin: 0;
+}
+.footer__sections {
+  padding: 1em 0;
+}
+
+.footer-section--primary > .footer-section__content {
+  line-height: 1.8;
+}
+
+@media (min-width: 700px) {
   /* nav */
-  .nav-container{
+  .container--nav{
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
