@@ -1,4 +1,3 @@
-### `git subtree push --prefix css origin gh-pages`
 
 [Conquering Responsive Layouts - Kevin Powell](https://courses.kevinpowell.co/courses/conquering-responsive-layouts)
 
