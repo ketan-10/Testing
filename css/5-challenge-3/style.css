@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap');
+
+/* before and after as pseudo elements */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body{
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.hero {
+  background: #23424A;
+  color: white;
+  /* not adding zero padding stays the same
+    as we are centering the .container, but it creates huge padding on mobile screens 
+  */
+  padding: 5em 0;
+}
+
+.container {
+  max-width: 60em;
+  margin: 0 auto;
+  width: 80%;
+}
+
+.intro {
+  width: 60%;
+}
+
+/* BEM naming system https://www.youtube.com/watch?v=SLjHSVwXYq4 */
+.intro__body {
+  color: #8F9BB3;
+  /* margin is on paragraph not button as, button might be re-usable */
+  margin-bottom: 3em;
+}
+
+
+.intro__button {
+  background: #38CFD9;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 1em 2em;
+  border-radius: 2em;
+  /* as a tag is inline by default -> and for inline margin does not work */
+  /* https://stackoverflow.com/questions/47902021/why-margin-top-does-not-work-in-anchor-tag-but-in-button-in-works */
+  display: inline-block;
+  font-weight: bold;
+  color: #23424A;
+}
+
+.intro__button:focus,
+.intro__button:hover {
+  opacity: .75;
+}

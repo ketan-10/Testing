@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&display=swap');
+
+/* https://www.youtube.com/watch?v=WlGQdgy-M6w */
+*, *::after, *::before {
+  box-sizing: inherit;
+}
+html {
+  box-sizing: border-box;
+}
+
+/* so image does not overflow */
+img {
+  /* display: inline-block; */
+  max-width: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.container {
+  width: min(80%, 70em);
+  margin: 0 auto;
+}
+
+.row{
+  display: flex;
+  gap: 3em;
+}
+
+.header__box {
+  /* display: flex; */
+  /* gap: 3em; */
+  /* flex-direction: column; */
+  /* justify-content: center; */
+  /* align-items: center; */
+
+  padding: 15em 0;
+  width: min(80%, 40em);
+  margin: 0 auto;
+  gap: 0;
+}
+
+header {
+  text-align: center;
+  background: #F3EED9;
+}
+
+.header__info {
+  /* color: red; */
+  font-family: 'Roboto Light', cursive;
+  font-size: 1.2rem;
+}
+
+.header__title {
+  font-family: 'Playfair Display Black', serif;
+  color: #824936;
+  font-weight: bold;
+  /* font-size: 3.5rem; */
+  /* font-size: 5vw; */
+  /* font-size: min(3.5rem, 5vw); not work for mobile */
+  /* font-size: min(3.5rem, max(5vw, 2rem)); */
+  /* font-size: clamp(3.5rem, 5vw, 2rem); */
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  margin-top: 0px;
+}
+
+.primary{
+  /* margin: 2em inherit; <- set margin top-bottom and inherit auto, didn't worked-out */
+  padding: 5em 0;
+}
+
+.primary__title {
+  font-family: 'Playfair Display Black', serif;
+  color: #824936;
+  text-align: center;
+  margin-bottom: 1.2em;
+  font-size: 2.25rem;
+}
+.primary__content{
+  font-size: 1.3rem;
+}
+
+.info {
+  color: white;
+  padding: 4em 0;
+}
+
+.info--first {
+  background: #222C2A;
+}
+
+.info__title {
+  color: #F3EED9 ;
+}
+
+/* .info__img{ */
+  /* align-self: flex-start; */
+  /* flex-grow: 1; */
+  /* width: 100%; */
+  /* max-width: 0; */
+  /* flex: 1  */
+  /* width: 100%; */
+/* } */
+
+
+.info--first__section{
+  /* flex: 1; */
+  /* width: 100%; */
+  flex: 1 1 0px;
+}
+
+.info__image-container {
+  /* width: 100%; <- does not work for small screens */
+  flex: 1 1 0px;
+}
+
+.info--second {
+  background: #824936;
+}
+
+.info--second > .row {
+  flex-direction: row-reverse;
+}
+
+@media (max-width: 600px) {
+  .row {
+    display: block;
+  }
+}

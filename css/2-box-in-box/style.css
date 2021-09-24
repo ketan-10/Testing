@@ -1,0 +1,15 @@
+.parent{
+  background: yellow;
+  /* border: 1px solid black; */
+  padding: 20px;
+
+  width: 80%;
+  margin: 0 auto;
+}
+
+
+.child{
+  background: lightblue;
+  /* margin: 20px; */
+  min-height: 250px;
+}

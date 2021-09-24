@@ -1,0 +1,11 @@
+
+
+/* https://stackoverflow.com/questions/52172212/html-element-height-including-margin-and-childrens-margin */
+
+.block {
+  background-color:gray;
+  border: 1px solid black;
+  /* height: 40px; */
+  /* padding: 1px; */
+  margin-top: 20px;
+}
