@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../assets/style.css">
+  <title>Starter Files and Tooling Setup!</title>
+</head>
+
+<style>
+  h1 {
+    font-size: 10rem;
+  }
+  .card {
+    /* width: ; */
+    width: 70%;
+    margin: 0 auto;
+    /* height: 40em; */
+    /* height: fit-content; */
+    min-height: 40em;
+    /* position: relative; */
+    display: flex;
+    text-align: center;
+  }
+  
+  .header {
+    flex: 1;
+    /* position: absolute; */
+    /* align-self: flex-start; */
+    
+    transition: top 0.5s ease-in-out,
+    bottom 0.5s ease-in-out,
+    left 0.5s ease-in-out,
+    right 0.5s ease-in-out;
+  }
+  .header > div {
+    height: 50%;
+    background-color: var(--yellow);
+  }
+  
+  .header:hover {
+    /* height: 70%; */
+  }
+  .content {
+    flex: 1;
+  }
+
+</style>
+
+<body>
+  <div class="card">
+    <div class="header">
+      <div>
+        <h1>Ketan Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed consequatur laborum ut quam sint culpa molestiae voluptate dicta, quia distinctio, debitis dolore eos vitae possimus expedita aspernatur odit necessitatibus itaque!</h1>
+      </div>
+    </div>
+    <div class="content">
+      <h1>Hello World</h1>
+    </div>
+  </div>
+  <!-- <h2>hello</h2> -->
+</body>
+
+</html>
