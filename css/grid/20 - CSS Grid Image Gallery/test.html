@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CSS Grid Image Gallery!</title>
+</head>
+
+<body>
+
+  <div class="overlay">
+    <div class="overlay-inner">
+      <button class="close">× Close</button>
+      <img src="images/2.jpg" alt="2nd image">
+    </div>
+  </div>
+
+
+  <style>
+
+    body {
+      padding: 50px;
+      font-family: sans-serif;
+      background: linear-gradient(to right, #F93D66, #6D47D9);
+    }
+
+
+    .close {
+      background: none;
+      color: black;
+      border: 0;
+    }
+    .overlay {
+      display: grid;
+      justify-content: center;
+      align-items: center;
+
+    }
+
+    .overlay-inner {
+      background: white;
+      max-width: 50vw;
+      /* max-height: 50vh; */
+      /* height: 100%; */
+      padding: 20px;
+    }
+
+    .overlay img {
+      max-height: 100%;
+      max-width: 100%;
+    }
+    .overlay button {
+      display: block;
+    }
+  </style>
+
+  <script>
+    // get overlay-inner element
+    const overlayInner = document.querySelector('.overlay-inner');
+
+    // get overlay image
+    const overlayImg = overlayInner.querySelector('img');
+
+  </script>
+ 
+</body>
+
+</html>

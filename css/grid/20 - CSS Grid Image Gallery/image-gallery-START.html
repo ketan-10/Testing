@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CSS Grid Image Gallery!</title>
+</head>
+
+<body>
+
+  <div class="overlay">
+    <div class="overlay-inner">
+      <button class="close">× Close</button>
+      <img>
+    </div>
+  </div>
+
+  <section class="gallery">
+    <div class="image--container"> <div><button>view more</button></div><img src="images/1.jpg" alt="1st image"> </div>
+    <div class="image--container"> <div></div><img src="images/2.jpg" alt="2nd image"> </div>
+    <div class="image--container"> <div></div><img src="images/3.jpg" alt="3rd image"> </div>
+    <div class="image--container"> <div></div><img src="images/4.jpg" alt="4th image"> </div>
+    <div class="image--container"> <div></div><img src="images/5.jpg" alt="5th image"> </div>
+    <div class="image--container"> <div></div><img src="images/6.jpg" alt="6th image"> </div>
+    <div class="image--container"> <div></div><img src="images/7.jpg" alt="7th image"> </div>
+    <div class="image--container"> <div></div><img src="images/8.jpg" alt="8th image"> </div>
+    <div class="image--container"> <div></div><img src="images/9.jpg" alt="9th image"> </div>
+    <div class="image--container"> <div></div><img src="images/10.jpg" alt="10th image"> </div>
+    <div class="image--container"> <div></div><img src="images/11.jpg" alt="11th image"> </div>
+    <div class="image--container"> <div></div><img src="images/12.jpg" alt="12th image"> </div>
+  </section>
+
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      padding: 50px;
+      font-family: sans-serif;
+      background: linear-gradient(to right, #F93D66, #6D47D9);
+    }
+
+    h1,h2,h3,h4,h5,h6 {
+      margin: 0 0 5px 0;
+    }
+
+    p {
+      margin: 0 0 20px 0;
+    }
+
+/* my-code gallery  */
+    
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 100px);
+      grid-template-rows: repeat(10, 100px);
+      /* grid-template-rows: repeat(10, 100px); */
+      justify-content: center;
+      /* dense grid */
+      grid-auto-flow: dense;
+    }
+
+    section img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    section img:hover{
+      /* transition: opacity 0.5s ease-in-out;
+      opacity: 0.5; */
+      
+    }
+    
+    section img:nth-child(2){
+      grid-column: span 3;
+    }
+    
+
+/* overlay */
+    .close {
+      background: none;
+      color: black;
+      border: 0;
+    }
+    .overlay {
+      position: fixed;
+      background: rgba(0, 0, 0, 0.7);
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: none;
+      z-index: 2;
+    }
+
+    .overlay.open {
+      display: grid;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .overlay-inner {
+      background: white;
+      max-width: min(700px, 90vw);
+      padding: 20px;
+    }
+
+    .overlay img {
+      height: 100%;
+      max-width: 100%;
+    }
+    .overlay button {
+      display: block;
+    }
+
+/* image--container animation */
+
+    .image--container {
+      position: relative;
+    }
+
+    /* .image--container > div {
+      position: absolute;
+      background-color: red;
+      opacity: 0.3;
+      height: 0;
+      width: 100%;
+
+    }
+
+    .image--container:hover > div {
+      transition: height 0.3s ease-in-out;
+      height: 100%;
+    } */
+
+
+    .image--container > div {
+      position: absolute;
+      background-color: red;
+      opacity: 0.3;
+      top: 100%;
+      bottom: 0;
+      width: 100%;
+      overflow: hidden;
+
+    }
+
+    .image--container:hover > div {
+      /* transition: opacity 0.5s ease-in-out;
+      opacity: 0.5; */
+      transition: top 0.3s ease-in-out;
+      top: 0;
+      
+    }
+
+  </style>
+
+  <script>
+    const randomIntFromInterval = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
+
+    const getRandom = randomIntFromInterval.bind(null, 1, 5);
+
+
+    const gallery = document.querySelector('.gallery');
+    const overlay = document.querySelector('.overlay');
+    const closeButton = document.querySelector('.close');
+    const overlayImg = document.querySelector('.overlay img');
+
+    // loop through all images
+    for (const container of gallery.children) {
+      // const img = container.children[1];
+      container.style.gridRowEnd = `span ${getRandom()}`;
+      container.style.gridColumnEnd = `span ${getRandom()}`;
+
+      container.addEventListener('click', (event) => {
+        const src = container.querySelector('img').src;
+
+        // overlay.style.display = 'block';
+        overlay.classList.add('open');
+        overlayImg.src = src;
+        // overlay.classList.add('open');
+
+      });
+
+    // overlayClose.addEventListener('click', () => {
+    //   overlay.classList.remove('open');
+    // });
+
+      
+    }
+
+    // on close click display none
+    closeButton.addEventListener('click', () => {
+      // overlay.style.display = 'none';
+      overlay.classList.remove('open');
+    });
+
+
+    // const overlay = document.querySelector('.overlay');
+    
+    // const overlayClose = document.querySelector('.overlay button');
+
+
+  </script>
+</body>
+
+</html>

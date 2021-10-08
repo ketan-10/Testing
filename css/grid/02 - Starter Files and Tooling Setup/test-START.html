@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../assets/style.css">
+  <title>Starter Files and Tooling Setup!</title>
+</head>
+
+<style>
+  h1 {
+    font-size: 10rem;
+  }
+  .card {
+    /* width: ; */
+    width: 70%;
+    margin: 0 auto;
+    min-height: 50em;
+    position: relative;
+    /* display: flex; */
+    text-align: center;
+  }
+  
+  .header {
+    background-color: var(--yellow);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* height: 50%; */
+    /* height: 50%; */
+    transition: top 0.5s ease-in-out,
+      bottom 0.5s ease-in-out,
+      left 0.5s ease-in-out,
+      right 0.5s ease-in-out;
+  }
+  .header:hover {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 50%;
+  }
+
+  .content {
+    background-color: var(--black);
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+
+    color: white;
+  }
+
+</style>
+
+<body>
+  <div class="card">
+    <div class="header">
+      <h1>Ketan</h1>
+    </div>
+    <div class="content">
+      <h1>Hello World</h1>
+    </div>
+  </div>
+  <!-- <h2>hello</h2> -->
+</body>
+
+</html>
