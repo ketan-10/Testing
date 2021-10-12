@@ -7,6 +7,7 @@ check "vpc-image.jpg"
 AWS: 
 https://www.youtube.com/playlist?list=PLv2a_5pNAko0Mijc6mnv04xeOut443Wnk -> VPC 
 https://start.jcolemorrison.com/aws-vpc-core-concepts-analogy-guide/ -> VPC
+AWS VPC Beginner to Pro - Virtual Private Cloud Tutorial -> https://youtu.be/g2JOHLHh4rI
 
 
 NAT is used to provied only outbound trafic and it's response for private subnet, so the services in private subnet can download updates etc
