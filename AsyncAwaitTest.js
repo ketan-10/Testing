@@ -1,3 +1,28 @@
+/////////////////// Everything was callbacks!!! /////////////////////// 
+/// KotlinConf 2017 - Deep Dive into Coroutines on JVM by Roman Elizarov -> https://youtu.be/YrrUCSi72E8
+// Async Programming and Project Loom by Dr Venkat Subramaniam -> https://youtu.be/UqlF6Mfhnz0
+
+async function hello1(){
+  const value = await hello2();
+
+  let value2 = value + 2;
+  
+  return value2;
+}
+
+async function hello2(){}
+
+// -> to callback -> 
+
+function hello2(returnCallback){
+  hello((value) => {
+
+    let value2 = value + 2;
+    
+    returnCallback(value2);
+  });
+}
+
 //////////////////////////////////////////////////////////
 
 async function myfunc(i) {
