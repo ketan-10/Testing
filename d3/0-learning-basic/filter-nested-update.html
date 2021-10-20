@@ -1,0 +1,95 @@
+<!-- 
+
+  Following Code Is based on the following stack-overflow question: 
+    
+  https://stackoverflow.com/questions/30617719/why-d3-updates-entire-data
+
+  Please Read The complete question and answer before proceeding.
+
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <svg></svg>
+  <div id="my-div"></div>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script>
+
+        
+    console.log(d3.select(this));
+    var chart = d3.select("#my-div").append("svg");
+    var chartData = [];
+    chartData.push([{x: 100, y: 300}, {x: 200, y: 2}]);
+    chartData.push([{x: 100, y: 200}, {x: 2, y: 2}]);
+
+    var lineFunc = d3.line()
+        .x(d => d.x)
+        .y(d => d.y);
+
+    chart.append('g').classed('lines', true)
+        .selectAll('path')  /// empty selection
+        .data(chartData) // data binding
+        .enter()  // new selection
+        .append('path')
+        .attr('d', function(d) {
+            return lineFunc(d);
+        })
+        .attr('stroke', 'black')
+        .attr('stroke-width', 10)
+        .attr('fill', 'red');
+
+    chartData[1].push({x: 500, y: 50});
+    chart.selectAll('g.lines')
+    .selectAll('path')
+        // .data(chartData,key)
+        .data(chartData)
+
+        .filter(function(d){
+          console.log("This: ",this);
+          console.log("D3 This: ",d3.select(this));
+          // console.log("D3 This: ",d3.select(this).attr("stroke","red"));
+        })
+        .enter()
+        .append('path')
+        .attr('d', function(d) {
+            console.log('updating:');
+            console.log(d);
+            return lineFunc(d);
+        })
+        .attr('stroke', 'green')
+        .attr('stroke-width', 5)
+        .attr('fill', 'none');
+
+        function key(d, i, j) {
+          // print d
+          console.log("d: ",d);
+          // print i
+          console.log("i: ",i);
+          // print j
+          console.log("j: ",j);
+
+          // is array 
+          console.log("is array: ",Array.isArray(this));
+
+          var k = Array.isArray(this) ? lineAttr(d, lineFunc, "d") : d3.select(this).attr("d");
+          console.log((Array.isArray(this) ? "data\t" : "node\t") + k)
+          return k;
+
+          function lineAttr(d, lineFunct, attribute) {
+            var l = d3.select("svg").selectAll("g")
+              .append("path").style("display", "none")
+              .attr(attribute, lineFunct(d))
+            d = l.attr(attribute);
+            l.remove();
+            return d;
+          }
+        }
+  </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!-- 
+  D3.geo code From video by 'Andrew Chen': 
+  D3.js tutorial : Explaining D3.geo, Projections, GeoJSON (https://www.youtube.com/watch?v=MTR2T5VyxMc)
+ -->
+
+<!DOCTYPE html>
+<meta charset="utf-8" />
+
+<!-- Load d3.js and the geo projection plugin -->
+<script src="https://d3js.org/d3.v4.js"></script>
+<script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+<!-- Create an element where the map will take place -->
+<svg id="my_dataviz" width="630" height="350"></svg>
+
+<script>
+  // The svg
+  var svg = d3.select("svg"),
+    width = +svg.attr("width"),
+    height = +svg.attr("height");
+
+  // Map and projection
+  var projection = d3
+    .geoMercator()
+    .center([0, 20]) // GPS of location to zoom on
+    .scale(99) // This is like the zoom
+    .translate([width / 2, height / 2]);
+
+  d3.queue()
+    .defer(
+      d3.json,
+      "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson"
+    ) // World shape
+    .defer(
+      d3.csv,
+      "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_gpsLocSurfer.csv"
+    ) // Position of circles
+    .await(ready);
+
+  function ready(error, dataGeo, data) {
+    console.log("dataGeo", dataGeo, "data", data);
+
+    // draw the map
+    svg
+      .append("g")
+      .selectAll("path")
+      .data(dataGeo.features)
+      .enter()
+      .append("path")
+      .attr("d", d3.geoPath().projection(projection))
+      .attr("fill", "#ccc")
+      .attr("stroke", "#fff");
+
+
+
+    
+    console.log(d3.extent(data, d => d.n))
+    const mappingCircleRadius = 
+      d3.scaleSqrt()
+        .domain(d3.extent(data, d => +d.n))
+        .range([0, 50]);
+
+    // draw the circles with data
+    svg
+      .append("g")
+      .selectAll("circle")
+      .data(data)
+      .enter()
+      .append("circle")
+      .attr("cx", function(d) {
+        return projection([d.homelon, d.homelat])[0];
+      })
+      .attr("cy", function(d) {
+        return projection([d.homelon, d.homelat])[1];
+      })
+      .attr("r", d => mappingCircleRadius(d.n))
+      .attr("fill", "#ff0000")
+      .attr("opacity", "0.3") 
+
+  }
+</script>
