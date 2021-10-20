@@ -1,6 +1,9 @@
 
 // https://thenewstack.io/mastering-javascript-callbacks-bind-apply-call/
 
+// This Binding arrow function is not possible -> https://stackoverflow.com/questions/33308121/can-you-bind-this-in-an-arrow-function
+// can we use arrow function in jquery??? 
+
 // Javascript 'THIS'
 const Obj = {
   test: 10,
