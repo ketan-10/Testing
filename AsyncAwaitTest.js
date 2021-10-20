@@ -2,6 +2,10 @@
 /// KotlinConf 2017 - Deep Dive into Coroutines on JVM by Roman Elizarov -> https://youtu.be/YrrUCSi72E8
 // Async Programming and Project Loom by Dr Venkat Subramaniam -> https://youtu.be/UqlF6Mfhnz0
 
+// Everythig was callbacks: 
+//  i) only few functions like `setTimeout()` has permission to push to 'event-loop'
+//  ii) to make all the other function suspendable, compiler just converts them to callback like below example
+//  iii) in multithreaded application that mean, any free thread can take the callback for execution, as it is not dependent on it's 'callstack'
 async function hello1(){
   const value = await hello2();
 
