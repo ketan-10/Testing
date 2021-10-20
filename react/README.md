@@ -17,3 +17,9 @@ so the current rendering component is closed under the function `setState()` <br
 For context API it is similar, i.e when a component renders it's stored temporarily in a global variable, <br>
 and when we call `useContext(MyContext)` somewhere, it knows that the current component is bind/subscribed to `MyContext`. <br>
 So for any reason when `MyContext.Provider` re-renders, it will re-render all the components bind/subscribed to `MyContext`
+
+
+**Notes**
+
+- If parent components render, all it's child automatically render, unless they are wrapped under `React.memo()`
+- Using Context API just adding a hook, can make that exact component re-render, whenever `context.Provider` re-renders.
