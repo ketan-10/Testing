@@ -50,7 +50,10 @@
         // .data(chartData,key)
         .data(chartData)
 
+        // check without filter, try removing it. 
         .filter(function(d){
+      
+          // filter docuementation -> https://github.com/d3/d3-selection/blob/v3.0.0/README.md#selection_filter
           console.log("This: ",this);
           console.log("D3 This: ",d3.select(this));
           // console.log("D3 This: ",d3.select(this).attr("stroke","red"));
