@@ -8,6 +8,8 @@
 
 - [Immer Tutorial | Immer and React Match Made in Heaven](https://youtu.be/8kC5fHlir4E)
 
+- [Are single-page-applications better than multi-page-applications? - HTTP 203](https://youtu.be/ivLhf3hq7eM)
+
 
 Calling a function component returns a Shadow DOM Builder object, the Builder is not directly called first time <br>
 It internally calls render on the builder, when it does react keep track of the current component which is being rendered in a global variable, <br>
