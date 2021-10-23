@@ -24,7 +24,7 @@ So for any reason when `MyContext.Provider` re-renders, it will re-render all th
 - Using Context API just adding a hook, can make that exact component re-render, whenever `context.Provider` re-renders.
 
 
-**Single Page Applications and lazy loading**
+## **Single Page Applications and lazy loading**
 
 - [Are single-page-applications better than multi-page-applications? - HTTP 203](https://youtu.be/ivLhf3hq7eM)
 
