@@ -6,6 +6,8 @@
 
 [cssgrid.io](https://cssgrid.io/)
 
+[D3.js tutorial by andrew chen](https://www.youtube.com/watch?v=UYrJ4jukvig&list=PLPtgdQ4YE9cgdPwOKShhPHdVEseLPGd_t)
+
 ### Videos: 
 
 How flexbox calculates:  [Flexbox is more complicated than you thought](https://youtu.be/fm3dSg4cxRI)
