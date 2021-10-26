@@ -48,3 +48,15 @@ iii) the code will (react) run of new page to construct the dom and finally disp
 next js also can't solve this as there is no pre page loading (server side rendering) for history API 
 if Page is huge we can break the page in a few part and lazy load it with Code-Splitting, it will still go through all 3 steps but for small parts of page
 
+
+## **How it works**
+
+If we create a table with jquery way, <br>
+How will we update the table if data changes?? <br>
+If we create a new dom for the entire table each time data is updated, There will be unnecessary dom element creation. <br>
+Otherwise, we have to write huge logic to locate the changed element and update that element. <br>
+What if we just change the element in virtual DOM and create a common code to lookup for changes and update the real DOM that's React. <br>
+
+- [How React Works behind the scenes - Pluralsight audition](https://youtu.be/gApwC9Ek9yo)
+- [Learn to Code: How React.js Works](https://youtu.be/mLMfx8BEt8g)
+- [Does the browser re-render the whole page on changes or only the specific elements?](https://stackoverflow.com/questions/25464939/does-the-browser-re-render-the-whole-page-on-changes-or-only-the-specific-elemen)
