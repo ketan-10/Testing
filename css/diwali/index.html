@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+
+
+    @import url('https://fonts.googleapis.com/css?family=Oswald:400,700');
+    
+    *, *::after, *::before {
+      box-sizing: border-box;
+      margin: 0;
+    }
+    
+    :root {
+      --primary: #4e5525;
+      --secondary: rgb(245, 233, 233);
+    }
+    
+    body {
+      /* font-size: 4rem; */
+      /* height: 100vh; */
+      /* margin-top: auto; */
+      height: 80vh;
+      display: grid;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Oswald', sans-serif;
+      background: #333;
+    }
+
+    .card {
+      width: 400px;
+      border: 1px solid var(--primary);
+      text-transform: uppercase;
+    }
+
+    .card:hover .card__container {
+      transform: rotateY(0.5turn);
+    }
+
+    .card__container {
+      position: relative;
+      padding: 10rem 2rem;
+      transition: transform 3s;
+      
+      /* transform: rotateY(0.5turn); */
+
+      transform-style: preserve-3d;
+      /* backface-visibility: hidden; */
+    }
+
+    .card__front::before {
+      content: '';
+      position: absolute;
+      top: 1.5rem;
+      left: 1.5rem;
+      right: 1.5rem;
+      bottom: 1.5rem;
+      border: 2px solid var(--secondary);
+      transform: translateZ(3rem);
+    }
+
+    .card__front,
+    .card__back {
+      position: absolute;
+      text-align: center;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      /* display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column; */
+      display: grid;
+      align-content: center;
+      backface-visibility: hidden;
+      
+      transform-style: preserve-3d;
+    }
+
+    .card__front {
+
+      background-image: url(diwali.jpg);
+      background-size: cover;
+      background-blend-mode: overlay;
+      background-color: var(--primary);
+      color: var(--secondary);
+
+    }
+
+    .card__back {
+      transform: rotateY(0.5turn);
+      background: linear-gradient(to right, #F93D66, #6D47D9);
+      /* background: linear-gradient(to right, var(--primary), var(--secondary)); */
+
+      color: var(--primary);
+    }
+
+
+    .card__title {
+      font-size: 3rem;
+      transform: translateZ(9rem);
+    }
+
+    .card__subtitle {
+      transform: translateZ(6rem);
+    }
+
+h1 {
+  transform: translateZ(6rem);
+}
+
+
+.card__back .firework {
+	position: absolute;  
+}
+.explosion {
+	position: absolute;
+	left: -2px;
+	bottom: 0;
+	width: 4px;
+	height: 80px;
+	transform-origin: 50% 100%;
+	overflow: hidden;
+}
+.explosion:nth-child(1) {
+	transform: rotate(0deg) translateY(-15px);
+}
+.explosion:nth-child(2) {
+	transform: rotate(30deg) translateY(-15px);
+}
+.explosion:nth-child(3) {
+	transform: rotate(60deg) translateY(-15px);
+}
+.explosion:nth-child(4) {
+	transform: rotate(90deg) translateY(-15px);
+}
+.explosion:nth-child(5) {
+	transform: rotate(120deg) translateY(-15px);
+}
+.explosion:nth-child(6) {
+	transform: rotate(150deg) translateY(-15px);
+}
+.explosion:nth-child(7) {
+	transform: rotate(180deg) translateY(-15px);
+}
+.explosion:nth-child(8) {
+	transform: rotate(210deg) translateY(-15px);
+}
+.explosion:nth-child(9) {
+	transform: rotate(240deg) translateY(-15px);
+}
+.explosion:nth-child(10) {
+	transform: rotate(270deg) translateY(-15px);
+}
+.explosion:nth-child(11) {
+	transform: rotate(300deg) translateY(-15px);
+}
+.explosion:nth-child(12) {
+	transform: rotate(330deg) translateY(-15px);
+}
+
+.explosion::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 100%;
+	height: 40px;
+	background-color: #f5cf52;
+}
+@keyframes explosion {
+	0% {
+		top: 100%;
+	}
+	33%, 100% {
+		top: -50%;
+	}
+}
+
+#firework1 {
+	left: 50%;
+	top: 50%;
+	transform: scale(1);
+}
+#firework1 .explosion::before {
+	animation: explosion 2s ease-in-out infinite;
+}
+
+#firework2 {
+	left: 40%;
+	top: 45%;
+	transform: scale(.7);
+}
+#firework2 .explosion::before {
+	animation: explosion 2s .6s ease-in-out infinite;
+}
+
+#firework3 {
+	left: 60%;
+	top: 65%;
+	transform: scale(.4);
+}
+#firework3 .explosion::before {
+	animation: explosion 2s .4s ease-in-out infinite;
+}
+
+.youtube-link {
+	position: fixed;
+	left: 20px;
+	bottom: 20px;
+	color: #fff;
+	text-decoration: none;
+	font-size: 12px;
+}
+
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="card__container">
+      <div class="card__front">
+        <p class="card__subtitle">To you and your family</p>
+        <h3 class="card__title">Happy Diwali</h3>
+
+      </div>
+      <div class="card__back">
+        <h1>From Ketan</h1>
+        <div class="firework" id="firework1">
+          <div class="explosion"></div>
+          <div class="explosion"></div>
+          <div class="explosion"></div>
+          <div class="explosion"></div>
+          <div class="explosion"></div>
+          <div class="explosion"></div>
+          <div class="explosion"></div>
+          <div class="explosion"></div>
+          <div class="explosion"></div>
+          <div class="explosion"></div>
+          <div class="explosion"></div>
+          <div class="explosion"></div>
+        </div>
+        <div class="firework" id="firework2">
+          <div class="explosion"></div>
+          <div class="explosion"></div>
+          <div class="explosion"></div>
+          <div class="explosion"></div>
+          <div class="explosion"></div>
+          <div class="explosion"></div>
+          <div class="explosion"></div>
+          <div class="explosion"></div>
+          <div class="explosion"></div>
+          <div class="explosion"></div>
+          <div class="explosion"></div>
+          <div class="explosion"></div>
+        </div>
+        <div class="firework" id="firework3">
+          <div class="explosion"></div>
+          <div class="explosion"></div>
+          <div class="explosion"></div>
+          <div class="explosion"></div>
+          <div class="explosion"></div>
+          <div class="explosion"></div>
+          <div class="explosion"></div>
+          <div class="explosion"></div>
+          <div class="explosion"></div>
+          <div class="explosion"></div>
+          <div class="explosion"></div>
+          <div class="explosion"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+</body>
+</html>
