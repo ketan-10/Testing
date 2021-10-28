@@ -1,0 +1,2 @@
+- [Create a 3D flipping animation with HTML and CSS](https://youtu.be/FeJEEE3zc4U)
+- [Simple Stick Fireworks Effect Using HTML & CSS](https://youtu.be/K4K7HNavK4U)
