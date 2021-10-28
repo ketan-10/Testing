@@ -26,6 +26,8 @@ So for any reason when `MyContext.Provider` re-renders, it will re-render all th
 
 ## **Single Page Applications and lazy loading**
 
+- [The Drawback of Client Side Rendering](https://youtu.be/xTsYYxf2Ut0)
+
 - [Are single-page-applications better than multi-page-applications? - HTTP 203](https://youtu.be/ivLhf3hq7eM)
 
 1) in ssr/mpa -> server have to render each page 
