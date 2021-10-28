@@ -30,7 +30,7 @@
     }
 
     .card {
-      width: 400px;
+      width: min(400px, 100vw);
       border: 1px solid var(--primary);
       text-transform: uppercase;
     }
@@ -109,6 +109,14 @@
 
   .card__back h1 {
     transform: translateZ(6rem);
+  }
+  .card__back p {
+    font-size: 0.7rem;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 0.2rem;
+    /* position: a; */
   }
 
   .firework {
@@ -217,6 +225,7 @@
       </div>
       <div class="card__back">
         <h1>From Ketan</h1>
+        <p>click away!</p>
       </div>
       <div class="fire">
         <div class="firework" id="firework1">
