@@ -224,7 +224,7 @@
 
       </div>
       <div class="card__back">
-        <h1>From Ketan</h1>
+        <h1>From <br><span id="name">Ketan</span></h1>
         <p>click away!</p>
       </div>
       <div class="fire">
@@ -273,5 +273,12 @@
       </div>
     </div>
   </div>
+
+  <script>
+    const hash = decodeURI(window.location.hash.substring(1));
+    if(hash) {
+      document.getElementById('name').innerText = hash;
+    }
+  </script>
 </body>
 </html>
