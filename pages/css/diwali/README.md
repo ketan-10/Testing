@@ -1,2 +1,4 @@
 - [Create a 3D flipping animation with HTML and CSS](https://youtu.be/FeJEEE3zc4U)
 - [Simple Stick Fireworks Effect Using HTML & CSS](https://youtu.be/K4K7HNavK4U)
+- [Fun ways to animate CSS gradients](https://youtu.be/f3mwKLXpOLk)
+- [Complex CSS Backgrounds with a Single Property!?](https://youtu.be/muE2B0Zylbw)
