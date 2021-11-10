@@ -1,8 +1,10 @@
+// my older notes about javascript async/await, worth reading.
+
 async await 
 
 whenever execution continues
 
-The current thread sees a async funtion call it
+The current thread sees a async function call it
 
 gets in 
 
