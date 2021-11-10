@@ -3,18 +3,18 @@
 - CompletableFuture only passes through the 'then' chain/ tree once <br>
   where as Flow in for continuous data, like timer, WebSocket, database read(one by one), reading or uploading file <br>
   It works on 'Consumer request n object' -> Provider then calls onNext 'n' times.
-   - Lazy / Cold: <br>
+   - **Lazy / Cold:** <br>
      Element are only generated when 'Consumer'(next in chain) ask for it. <br>
      And if you subscribe multiple time -> each will create a different unique stream, with independent elements
-   - Hot: <br>
+   - **Hot:** <br>
      Immediately starts, Don't wait for the subscriber <br>
      all subscribers get the same element <br>
      Only one steam for all subscriber <br>
      If the subscriber does not request the element, it is stacked as a backpressure, till the size is reached. <br>
-   - CF: <br>
+   - **CF:** <br>
      for completable future you will create a future for each data entity, and they will be running in parallel <br>
      where as in flow there is stream of data which goes through pipeline <br>
-   - JavaScript: <br>
+   - **JavaScript:** <br>
      java flux vs js generator -> generator waits for the element to process before asking for next element <br>
      i.e backpressure is responsibility of the sender.
      
@@ -48,25 +48,37 @@ Basics of Async: [Async Programming and Project Loom by Dr Venkat Subramaniam](h
   - Save All `state/locals` in a `closure` and early return by calling a `callback`.
   - How it is implemented in kotlin: [KotlinConf 2017 - Deep Dive into Coroutines on JVM by Roman Elizarov](https://youtu.be/YrrUCSi72E8)
   - Everything was callbacks: <br>
-    - only few functions like `setTimeout()` has permission to push to 'event-loop'
-    - to make all the other function suspendable, compiler just converts them to callback like below example
-    - in multithreaded application that mean, any free thread can take the callback for execution, as it is not dependent on it's 'callstack'
+    - Only few functions like `setTimeout()` has permission to push to 'event-loop'
+    - To make all the other function suspendable, compiler just converts them to callback like below example
+    - In multithreaded application that mean, any free thread can take the callback for execution, as it is not dependent on it's 'callstack'
+    - In Case of Javascript/C# after looking the compiled output it is clear, <br>
+      The execution continues even inside async function till special functions like `setTimeout()` is called, <br> 
+      Then the stack will be poped, According to language ThreadPool or Event Loop will manage the timings     
     ```js
-       async function hello1(){
-          const value = await hello2();
+       async function foo(){
+          const value = await bar();
           let value2 = value + 2;
           return value2;
        }
-        async function hello2(){}
+       async function bar(){
+          await setTimeout(1 sec);
+          return 10;
+       }
 
       // -> to callback ->
 
-       function hello2(returnCallback){
-           hello((value) => {
-           let value2 = value + 2;
+       function foo(returnCallback){
+          bar((value) => {
+              let value2 = value + 2;
 
-           returnCallback(value2);
-       });
+              returnCallback(value2);
+          });
+       }
+       function bar(callback) { 
+          setTimeout(1 sec, () => {
+             callback(10);
+          });
+       }
      ```
 - **Creating very small initial size and dynamic size Stacks for each task. <- Stackfull:** <br>
   - Operating System thread stack are not used developer, <br>
