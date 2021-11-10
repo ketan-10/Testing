@@ -2,7 +2,7 @@
 /// KotlinConf 2017 - Deep Dive into Coroutines on JVM by Roman Elizarov -> https://youtu.be/YrrUCSi72E8
 // Async Programming and Project Loom by Dr Venkat Subramaniam -> https://youtu.be/UqlF6Mfhnz0
 
-// Everythig was callbacks: 
+// Everything was callbacks: 
 //  i) only few functions like `setTimeout()` has permission to push to 'event-loop'
 //  ii) to make all the other function suspendable, compiler just converts them to callback like below example
 //  iii) in multithreaded application that mean, any free thread can take the callback for execution, as it is not dependent on it's 'callstack'
@@ -60,8 +60,7 @@ async function test(){
 test();
 console.log("end");
 
-
-********************
+///////////////////////////////////////////////////////////////////////////
 
 
 console.log("start");
@@ -78,7 +77,7 @@ async function test(){
 test();
 console.log("end");
 
-**************************
+///////////////////////////////////////////////////////////////////////////
 
 
 async function test2(){
@@ -103,17 +102,17 @@ test2()
 console.log("kte2");
 
 
-***OUT**
+// ***OUT**
 
 
-ketan1
-start
-mid
-1    // see it got inside await too 
-kte2
-0
-1
-2
+// ketan1
+// start
+// mid
+// 1    // see it got inside await too 
+// kte2
+// 0
+// 1
+// 2
 
 
 
@@ -124,5 +123,5 @@ console.log("end")
 
 
 console.log("start")
-let ketan = new Promise((resolve, reject) => {setTimeout(()=>{for(let k=0;k<1000000000;k++){}; console.log("done");resolve("ok")},4000) })
+let ketan2 = new Promise((resolve, reject) => {setTimeout(()=>{for(let k=0;k<1000000000;k++){}; console.log("done");resolve("ok")},4000) })
 console.log("end")
