@@ -1,4 +1,6 @@
-# [From Blog](https://medium.com/swlh/how-does-react-hooks-re-renders-a-function-component-cc9b531ae7f0)
+# React
+
+- Blog: [How does React Hooks re-renders a function Component?](https://medium.com/swlh/how-does-react-hooks-re-renders-a-function-component-cc9b531ae7f0)
 
 - [REACT MEMO vs USECALLBACK vs USEMEMO](https://youtu.be/uojLJFt9SzY)
 
