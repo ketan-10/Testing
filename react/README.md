@@ -25,6 +25,9 @@ So for any reason when `MyContext.Provider` re-renders, it will re-render all th
 - If parent components render, all it's child automatically render, unless they are wrapped under `React.memo()`
 - Using Context API just adding a hook, can make that exact component re-render, whenever `context.Provider` re-renders.
 
+**Functional-programing concept**
+
+- [Functional Programming in 40 Minutes • Russ Olsen • GOTO 2018](https://youtu.be/0if71HOyVjY)
 
 ## **Single Page Applications and lazy loading**
 
