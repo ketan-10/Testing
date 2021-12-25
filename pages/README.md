@@ -39,5 +39,10 @@ How Grid's `minmax()` works : [CSS minmax(): prioritize max value](https://stack
 
 [Intrinsically Responsive CSS Grid with minmax() and min()](https://css-tricks.com/intrinsically-responsive-css-grid-with-minmax-and-min/)
 
+#### D3 tracks add/remove but not data-updates
+
+- [Why d3 updates entire data](https://stackoverflow.com/questions/30617719/why-d3-updates-entire-data)
+
+- [My Code example](https://github.com/ketan-10/Testing/blob/master/pages/d3/0-learning-basic/filter-nested-update.html)
 
 
