@@ -66,11 +66,10 @@ Basics of Async: [Async Programming and Project Loom by Dr Venkat Subramaniam](h
        }
 
       // -> to callback ->
-
+      // 'return' is not utilized. 
        function foo(returnCallback){
           bar((value) => {
               let value2 = value + 2;
-
               returnCallback(value2);
           });
        }
@@ -79,7 +78,20 @@ Basics of Async: [Async Programming and Project Loom by Dr Venkat Subramaniam](h
              callback(10);
           });
        }
+       
+       // -> to promise ->
+       // utilize return.
+       function foo(){
+          return bar().then(x => x + 2);
+       }
+       function bar(callback) { 
+          return new Promise(s => setTimeout(s.bind(this,10),1))
+       }
+       
      ```
+     
+  - [Async/Await using Generators yield](https://www.promisejs.org/generators/)
+  - [Difference between async/await and ES6 yield with generators](https://stackoverflow.com/questions/36196608/difference-between-async-await-and-es6-yield-with-generators)
 - **Creating very small initial size and dynamic size Stacks for each task. <- Stackfull:** <br>
   - Operating System thread stack are not used developer, <br>
     As Operating System Stacks are huge 100MB in ram size reserved <br>
@@ -88,7 +100,7 @@ Basics of Async: [Async Programming and Project Loom by Dr Venkat Subramaniam](h
   - garbage collector is required as stack size is dynamic.
   - Low level/ System level language control is required (that's why Kotlin was not able to do this, as it does not change binary)
   - Languages like GO, Java Loom use this.
-  - [Ron Pressler — Why user-mode threads are (often) the right answer](https://youtu.be/KmMU5Y_r0Uk)
+  - [Ron Pressler — Why user-mode threads are (often) the right answer](https1780330@tcs.coyoutu.be/KmMU5Y_r0Uk)
 
 
 
