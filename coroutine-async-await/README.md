@@ -57,11 +57,10 @@ Basics of Async: [Async Programming and Project Loom by Dr Venkat Subramaniam](h
     ```js
        async function foo(){
           const value = await bar();
-          let value2 = value + 2;
-          return value2;
+          return value + 2;
        }
        async function bar(){
-          await setTimeout(1 sec);
+          await new Promise(s => setTimeout(s, 1000));
           return 10;
        }
 
@@ -88,6 +87,33 @@ Basics of Async: [Async Programming and Project Loom by Dr Venkat Subramaniam](h
           return new Promise(s => setTimeout(s.bind(this,10),1))
        }
        
+       // to generator function -> 
+       const foo = async(function* (){
+          const value = yield bar();
+          return value + 2;
+       })
+       const bar = async(function* (){
+          yield new Promise(s => setTimeout(s, 1000));
+          return 10;
+       })
+       
+        // async function -> 
+        function async(genFun){
+          return () => {
+            const gen = genFun();
+            
+            const recursion = () => {  
+              promise.then((output) => {
+                const nextPromise = gen.next(output);
+                recursion(nextPromise);
+              })
+            }
+            
+            const promise = gen.next();
+            recursion(promise);
+            
+          }
+        }
      ```
      
   - [Async/Await using Generators yield](https://www.promisejs.org/generators/)
