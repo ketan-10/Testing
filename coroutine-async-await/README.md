@@ -115,9 +115,25 @@ Basics of Async: [Async Programming and Project Loom by Dr Venkat Subramaniam](h
           }
         }
      ```
-     
+   
   - [Async/Await using Generators yield](https://www.promisejs.org/generators/)
   - [Difference between async/await and ES6 yield with generators](https://stackoverflow.com/questions/36196608/difference-between-async-await-and-es6-yield-with-generators)
+- How `yield` could be implemented: 
+    - Using `continuation` and `state-machine`:
+      - The generator function is considerd as a **Object**.
+      - Whenever yield occure the function returns,
+      - But before returning it stores the current state and clouser veriables in Object state.
+      - Now when next is called the same function is called, But with the previously stored state
+      - This is the way `suspend` functions are [implemented in kotlin](https://medium.com/androiddevelopers/the-suspend-modifier-under-the-hood-b7ce46af624f)
+    - Using Callbacks 
+      - Store everything next to yeild in a callback
+      - store the callback in generator Object
+      - Call the callback when `.next()` is called.
+      - Note: callback is not prefared as it overflows the call-stack, also it is hard to implement in for loop
+    - Using Function stack-frame in Heep
+      - in python we directly store the stack-frame in Heep.
+      - When yeild is called we just re-load the stack-frame from heep.
+      - [How are generators and coroutines implemented in CPython?](https://stackoverflow.com/questions/8389812/how-are-generators-and-coroutines-implemented-in-cpython)
 - **Creating very small initial size and dynamic size Stacks for each task. <- Stackfull:** <br>
   - Operating System thread stack are not used developer, <br>
     As Operating System Stacks are huge 100MB in ram size reserved <br>
