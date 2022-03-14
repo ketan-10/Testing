@@ -144,5 +144,21 @@ Basics of Async: [Async Programming and Project Loom by Dr Venkat Subramaniam](h
   - Languages like GO, Java Loom use this.
   - [Ron Pressler — Why user-mode threads are (often) the right answer](https1780330@tcs.coyoutu.be/KmMU5Y_r0Uk)
 
+- Temp
+```js
+  return fetch(url, {
+    headers
+  }).then(result => {
+    return new Promise(resolve => {
+      result.json().then((json) => {
+        resolve({
+          status: result.status,
+          data: json
+        })
+      })
+    })
+  });
+```
+
 
 
