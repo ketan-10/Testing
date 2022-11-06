@@ -160,5 +160,13 @@ Basics of Async: [Async Programming and Project Loom by Dr Venkat Subramaniam](h
   });
 ```
 
+## Rust
+[he What and How of Futures and async/await in Rust](https://youtu.be/9_3krAQtD2k)
+[Crust of Rust: async/await](https://youtu.be/ThjvMReOXYM)
 
+Coming from java when virtual threads are introduced in JDK 19 
+Found it very surprising that the underlying implementation on a high level is very similar. (https://inside.java/2021/05/10/networking-io-with-virtual-threads/)
+In Java there is a runtime to manage virtual thread stack in heap
+And we park thread if IO returns WouldBlock
+But the advantage of doing this is no need to think about async await, so existing library code does not have to add support for 'Future'. All the blocking calls by default become Async by language only, I think it's activated by creating a wrapper around syscalls.
 
