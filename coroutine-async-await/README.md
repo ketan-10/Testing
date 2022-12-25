@@ -87,36 +87,50 @@ Basics of Async: [Async Programming and Project Loom by Dr Venkat Subramaniam](h
           return new Promise(s => setTimeout(s.bind(this,10),1))
        }
        
-       // to generator function -> 
-       const foo = async(function* (){
-          const value = yield bar();
-          return value + 2;
-       })
-       const bar = async(function* (){
-          yield new Promise(s => setTimeout(s, 1000));
-          return 10;
-       })
-       
-        // async function -> 
-        function async(genFun){
-          return () => {
-            const gen = genFun();
-            
-            const recursion = () => {  
-              promise.then((output) => {
-                const nextPromise = gen.next(output);
-                recursion(nextPromise);
-              })
+     ```
+  - [Async/Await using Generators yield](https://www.promisejs.org/generators/) <br>
+    - Following example show if we have `continuation` of any sort, it's easy to implement async/await, 
+    - In javascript continuations are implemented by storing whole execution stack in heap, and rebrimging it back with same state (closure variables) when needed. But in languages like kotlin it is achived by state machines as we talk in next section.
+    - Thanks to javascript event loop, we don't worry about non-blocking i/o. But in languages like rust/java we have to manage task executor, and submit list of tasks to kernal using `epoll`,  And kernal will poll us if any of the task is avaliable for data ( for streams part of data). We talk about this in upcomming sections.
+    
+    ```js
+      // to generator function -> 
+      const foo = async(function* (){
+        const value = yield bar();
+        return value + 2;
+      })
+      const bar = async(function* (){
+        yield new Promise(s => setTimeout(s, 1000));
+        return 10;
+      })
+
+      // async function -> 
+      const async = (genFun) => {
+        return () => {
+          const myGen = genFun();
+          const result = myGen.next();
+
+          // while (!result.done) <- loops don't work with promises 😿
+          const recur = (genResult) => {
+            if(genResult.done){
+              return Promise.resolve(genResult.value);
             }
-            
-            const promise = gen.next();
-            recursion(promise);
-            
-          }
+            return genResult.value.then((promiseResult) => {
+              futureResult = myGen.next(promiseResult);
+              return recur(futureResult);
+            })
+          };
+          return recur(result);
         }
+      };
+      
+      foo().then(x => {
+        console.log(x);
+      });
      ```
    
-  - [Async/Await using Generators yield](https://www.promisejs.org/generators/)
+
+  
   - [Difference between async/await and ES6 yield with generators](https://stackoverflow.com/questions/36196608/difference-between-async-await-and-es6-yield-with-generators)
 - How `yield` could be implemented: 
     - Using `continuation` and `state-machine`:
@@ -124,7 +138,7 @@ Basics of Async: [Async Programming and Project Loom by Dr Venkat Subramaniam](h
       - Whenever yield occure the function returns,
       - But before returning it stores the current state and clouser veriables in Object state.
       - Now when next is called the same function is called, But with the previously stored state
-      - This is the way `suspend` functions are [implemented in kotlin](https://medium.com/androiddevelopers/the-suspend-modifier-under-the-hood-b7ce46af624f)
+      - This is the way `suspend` functions are [implemented in kotlin using state machines](https://medium.com/androiddevelopers/the-suspend-modifier-under-the-hood-b7ce46af624f)
     - Using Callbacks 
       - Store everything next to yeild in a callback
       - store the callback in generator Object
