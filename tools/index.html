@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+    <h3>Hex To String: </h3>
+
+    <input id="hextostringinput" placeholder="input hex array" />
+    <button onclick="buttonClicked">Go</button>
+    <div>
+        <h3>Output <span id="resultOp"></span></h3>
+    </div>
+    <script>
+
+        function toHexString(byteArray) {
+            return Array.from(byteArray, function(byte) {
+                return ('0' + (byte & 0xFF).toString(16)).slice(-2);
+            }).join('')
+        }
+
+        function buttonClicked() {
+            try {
+                const base8Array = JSON.parse(document.getElementById("hextostringinput"))
+                document.getElementById("resultOp").innerHTML = toHexString(base8Array)
+            }catch(err) {
+                document.getElementById("resultOp").innerHTML = err.message;
+            }
+
+        }
+    </script>
+</body>
+
+</html>
