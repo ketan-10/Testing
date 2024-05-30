@@ -11,7 +11,7 @@
     <h3>Hex To String: </h3>
 
     <input id="hextostringinput" placeholder="input hex array" />
-    <button onclick="buttonClicked">Go</button>
+    <button onclick="buttonClicked()">Go</button>
     <div>
         <h3>Output <span id="resultOp"></span></h3>
     </div>
@@ -25,7 +25,7 @@
 
         function buttonClicked() {
             try {
-                const base8Array = JSON.parse(document.getElementById("hextostringinput"))
+                const base8Array = JSON.parse(document.getElementById("hextostringinput").value)
                 document.getElementById("resultOp").innerHTML = toHexString(base8Array)
             }catch(err) {
                 document.getElementById("resultOp").innerHTML = err.message;
