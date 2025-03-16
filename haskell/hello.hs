@@ -52,11 +52,31 @@ example2 = do
     b <- [square, value, 30]
     return 40
 
+-- same as 
 
+example20 :: [Int]
+example20 = [1,2,3] >>= 
+                \a ->
+                    let value = 10
+                        square = value * value
+                    in [square, value, 30] 
+                        >>= \b -> return 40
+
+
+-- same as 
+
+-- example21 :: [Int]
+-- example21 = >>= ([1,2,3]
+--                 \a -> (
+--                         >>= (let value = 10 square = value * value
+--                                 in [square, value, 30]
+--                             ) 
+--                             \b -> return 40)
+--                         )
 
 -- main :: IO()
 -- main = print (mycustomMap (+1) [1..5])
 
 main :: IO()
-main = print example2
+main = print example20
 

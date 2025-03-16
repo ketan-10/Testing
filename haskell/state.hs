@@ -129,6 +129,22 @@ example20 = put 10
     >>= \s2 -> lift (putStrLn $ "State after modify: " ++ show s2) 
     >>= \_ -> return ("Current state: " ++ show s2)
 
+-- >>= StateT (\_ -> return ((), 10)), [(\x) -> ...]
+-- StateT ( 
+--    \s -> runStateT { StateT (\_ -> return ((), 10))} s 
+--          >>= \(a, s') -> runStateT ([(\x) -> ...] a) s'
+--  )
+
+-- on call 
+--    \0 -> runStateT { StateT (\_ -> return ((), 10))} 0
+--          >>= \(a, s') -> runStateT ([(\x) -> ...] a) s'
+-- >
+--    \0 -> IO ((), 10))
+--          >>= \(a, s') -> runStateT ([(\x) -> ...] a) s' 
+
+-- as you can see so the call `runStateT example2 0` retuns an IO monad
+-- returning IO monad mean we got out of StateT monad 
+
 example3 :: StateT String IO String
 example3 = do
     s1 <- get

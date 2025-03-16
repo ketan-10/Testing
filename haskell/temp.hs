@@ -6,6 +6,7 @@ newtype StateT s m a = StateT (s -> m (a, s))
 
 runStateT :: StateT s m a -> s -> m (a, s)
 runStateT (StateT f) = f -- 'constructor pattern matching' like `(Just x) = x`
+-- case Just x => return x
 
 -- "above same as: " -> newtype StateT s m a = StateT { runStateT :: s -> m (a, s) }
 
@@ -16,7 +17,7 @@ example7 = StateT (\state -> Holder ("result", state + 1))
 example8 :: StateT Int Holder String
 example8 = 
     let 
-        mayb = StateT ( \s ->  Holder ("result", s + 1))
+        mayb = StateT (\s ->  Holder ("result", s + 1))
     in mayb 
 
 -- myStateT :: StateT Int IO String
