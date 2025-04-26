@@ -1,0 +1,119 @@
+version: "3"
+
+networks: 
+  mynet: 
+    driver: bridge
+
+services:
+  gluetun:
+    image: qmcgaw/gluetun
+    container_name: gluetun
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    environment:
+      - VPN_SERVICE_PROVIDER=mullvad
+      - VPN_TYPE=wireguard
+      - WIREGUARD_PRIVATE_KEY=KIv+myktVSSZopVfOvoXN5iCDMUzFR99m1N1pT1prkI=
+      - WIREGUARD_ADDRESSES=10.71.37.222/32
+    ports:
+      - 8080:8080 # For qBittorrent web UI
+      - 9696:9696 # For prowlarr
+      # - 8096:8096 # For jellyfin
+      # - 7878:7878 # For radarr
+      # - 8989:8989 # For sonarr
+    volumes:
+      - /root/config/gluetun:/config
+    restart: unless-stopped
+    networks:
+      - mynet
+
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    network_mode: "service:gluetun"
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Asia/Kolkata
+    # ports: 
+      # - 9696:9696
+    volumes:
+      - /root/config/prowlarr:/config
+      - /media:/data
+    restart: unless-stopped
+    depends_on: 
+      gluetun: 
+        condition: service_healthy
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    network_mode: "service:gluetun"
+    environment:
+      - WEBUI_PORT=8080
+      - PUID=0
+      - PGID=0
+      - TZ=Asia/Kolkata
+    # ports: 
+      # - 8080:8080
+    volumes:
+      - /media:/data
+      - /root/config/qbittorrent:/config
+    restart: unless-stopped
+    depends_on: 
+      gluetun: 
+        condition: service_healthy
+
+
+  jellyfin:
+    image: linuxserver/jellyfin
+    container_name: jellyfin
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Asia/Kolkata
+    volumes:
+      - /root/config/jellyfin:/config
+      - /media/TvSeries:/data/tvshows
+      - /media/Movies:/data/movies
+    ports: 
+      - 8096:8096
+    devices:
+       - /dev/dri:/dev/dri
+    restart: unless-stopped
+    networks:
+      - mynet
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PGID=0
+      - TZ=Asia/Kolkata
+      - PUID=0
+    ports: 
+      - 7878:7878
+    volumes:
+      - /root/config/radarr:/config
+      - /media:/data
+    restart: unless-stopped
+    networks:
+      - mynet
+
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - TZ=Asia/Kolkata
+      - PUID=0
+      - PGID=0
+    ports: 
+      - 8989:8989
+    volumes:
+      - /root/config/sonarr:/config
+      - /media:/data
+    restart: unless-stopped
+    networks:
+      - mynet

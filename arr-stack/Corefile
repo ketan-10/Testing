@@ -1,0 +1,71 @@
+zerodha.tech {
+    log
+    errors
+    cache 30
+    forward  . 127.0.0.1:5053
+#    forward . 192.168.0.2
+}
+
+zero.tech {
+    log
+    errors
+    cache 30
+    forward  . 127.0.0.1:5053
+}
+
+zerodha.io {
+     log
+     errors
+     cache 30
+#     forward  . 127.0.0.1:5053
+     forward . 192.168.0.2
+}
+
+zeronet.private {
+    log
+    errors
+    cache 30
+    forward . 127.0.0.1:5053
+}
+
+zeronet.internal {
+    log
+    errors
+    cache 30
+    forward . 127.0.0.1:5053
+}
+
+enigma.internal {
+   log
+   errors
+   cache 30
+#   forward . 127.0.0.1:5053
+   forward . 192.168.0.2
+}
+
+kite.internal {
+    log
+    errors
+    cache 30
+    forward . 127.0.0.1:5053
+}
+
+. {
+    hosts {
+        192.168.9.32 kiteworkflow.zerodha.net
+        fallthrough
+    }
+    log
+    errors
+    cache 30
+#    forward . 8.8.8.8
+    forward . 100.100.100.100
+#    forward . tls://9.9.9.9 {
+#       tls_servername dns.quad9.net
+#       health_check 5s
+#    }
+#    forward . tls://dns.adguard-dns.com
+#    forward . tls://94.140.14.14 {
+#        tls_servername dns.adguard-dns.comhealth_check 5s
+#    }
+}
